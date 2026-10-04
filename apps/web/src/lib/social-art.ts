@@ -1,10 +1,11 @@
 export type SocialIconKind = "github" | "reddit" | "discord";
 
-const palette = {
+export const palette = {
   outline: "#211b18",
   steel: "#3d5059",
   ivory: "#e1e8d4",
   gold: "#dfb66a",
+  glow: "#ffe69a",
   mint: "#a5dbc3",
   teal: "#4f9692",
   rust: "#a94935",

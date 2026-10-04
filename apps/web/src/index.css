@@ -303,10 +303,16 @@ button:focus-visible {
   box-shadow: 5px 6px 0 #292b25;
   border-radius: 22px;
 }
-.sticker img {
+.sticker img,
+.sticker-fx {
+  grid-area: 1 / 1;
   width: 85%;
   height: 85%;
   object-fit: contain;
+}
+.sticker-fx {
+  /* Clicks pass through to the illustration, so its native image menu still works. */
+  pointer-events: none;
 }
 .sticker-monitor {
   background: #a9cbb5;
@@ -338,7 +344,7 @@ button:focus-visible {
   text-shadow:
     1px 1px 0 var(--ink),
     -1px -1px 0 var(--ink);
-  z-index: 2;
+  z-index: 3;
 }
 .spark-one {
   top: -4px;
@@ -1326,19 +1332,446 @@ body {
     opacity: 1;
   }
 }
+@keyframes sticker-turn {
+  0%,
+  30%,
+  100% {
+    scale: 0.97;
+    z-index: 1;
+  }
+  3% {
+    scale: calc(var(--turn-scale) + 0.04);
+    z-index: 2;
+  }
+  6%,
+  24% {
+    scale: var(--turn-scale);
+    z-index: 2;
+  }
+}
+@keyframes sticker-ring {
+  0% {
+    scale: 1;
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  12%,
+  100% {
+    scale: 1.24;
+    opacity: 0;
+  }
+}
+@keyframes relay-run {
+  0%,
+  22% {
+    translate: var(--bot-x) var(--bot-y);
+    scale: 0;
+  }
+  24.4% {
+    translate: var(--bot-x) var(--bot-y);
+    scale: 1;
+  }
+  32.2% {
+    translate: var(--monitor-x) var(--monitor-y);
+    scale: 1;
+  }
+  33.3%,
+  55.5% {
+    translate: var(--monitor-x) var(--monitor-y);
+    scale: 0;
+  }
+  57.8% {
+    translate: var(--monitor-x) var(--monitor-y);
+    scale: 1;
+  }
+  65.6% {
+    translate: var(--game-x) var(--game-y);
+    scale: 1;
+  }
+  66.7%,
+  88.9% {
+    translate: var(--game-x) var(--game-y);
+    scale: 0;
+  }
+  91.1% {
+    translate: var(--game-x) var(--game-y);
+    scale: 1;
+  }
+  98.9% {
+    translate: var(--bot-x) var(--bot-y);
+    scale: 1;
+  }
+  100% {
+    translate: var(--bot-x) var(--bot-y);
+    scale: 0;
+  }
+}
+@keyframes wire-draw {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  9%,
+  58% {
+    clip-path: inset(0);
+  }
+  66%,
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+@keyframes orbit-sway {
+  from {
+    rotate: -5deg;
+  }
+  to {
+    rotate: 5deg;
+  }
+}
+@keyframes fx-turn {
+  0%,
+  25%,
+  100% {
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+}
+@keyframes fx-blink {
+  0%,
+  7%,
+  15%,
+  23%,
+  100% {
+    opacity: 0;
+  }
+  4%,
+  12%,
+  20% {
+    opacity: 1;
+  }
+}
+@keyframes fx-blink-alt {
+  0%,
+  11%,
+  19%,
+  100% {
+    opacity: 0;
+  }
+  8%,
+  16% {
+    opacity: 1;
+  }
+}
+@keyframes fx-type {
+  0%,
+  7%,
+  25.1%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 1;
+  }
+  7.1% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+  14%,
+  25% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes game-play {
+  0%,
+  3%,
+  25%,
+  100% {
+    rotate: 0deg;
+  }
+  6%,
+  12%,
+  18% {
+    rotate: -5deg;
+  }
+  9%,
+  15%,
+  21% {
+    rotate: 5deg;
+  }
+}
+@keyframes bot-visor {
+  0%,
+  2%,
+  27%,
+  100% {
+    opacity: 0;
+  }
+  5%,
+  23% {
+    opacity: 1;
+  }
+}
+@keyframes bot-eye {
+  0%,
+  2%,
+  27%,
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+  5% {
+    opacity: 1;
+    scale: 1;
+  }
+  6.5%,
+  22.5% {
+    opacity: 1;
+    scale: 1 0.12;
+  }
+  6.6%,
+  22.4% {
+    opacity: 0;
+    scale: 1 0.12;
+  }
+  24% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes bot-eyes-happy {
+  0%,
+  6.5%,
+  22.5%,
+  100% {
+    opacity: 0;
+    scale: 1 0.2;
+  }
+  6.6%,
+  22.4% {
+    opacity: 1;
+    scale: 1 0.2;
+  }
+  8.5% {
+    scale: 1 1.14;
+  }
+  9.5%,
+  21% {
+    scale: 1;
+  }
+}
+@keyframes bot-cheek {
+  0%,
+  4%,
+  25%,
+  100% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  8%,
+  21% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes bot-mouth {
+  0%,
+  3.5%,
+  25%,
+  100% {
+    opacity: 0;
+    scale: 1 0.25;
+  }
+  5%,
+  23.5% {
+    opacity: 1;
+    scale: 1 0.25;
+  }
+  8%,
+  11%,
+  14% {
+    scale: 1 1.08;
+  }
+  9.5%,
+  12.5%,
+  15.5% {
+    scale: 1 0.86;
+  }
+  17%,
+  21% {
+    scale: 1;
+  }
+}
+@keyframes bot-joy {
+  0%,
+  3%,
+  24%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  6% {
+    translate: 0 -8%;
+    rotate: -6deg;
+  }
+  9% {
+    translate: 0 0;
+    rotate: 5deg;
+  }
+  12% {
+    translate: 0 -6%;
+    rotate: -4deg;
+  }
+  15% {
+    translate: 0 0;
+    rotate: 4deg;
+  }
+  18% {
+    translate: 0 -3%;
+    rotate: -2deg;
+  }
+}
+/* Sticker centres for the relay: keep them in sync with the sticker boxes above. */
+.hero-art {
+  container-type: inline-size;
+  --turn-cycle: 9s;
+  --turn-scale: 1.1;
+  --bot-x: calc(100cqw - 126px);
+  --bot-y: 112px;
+  --monitor-x: 129.5px;
+  --monitor-y: 217.5px;
+  --game-x: calc(100cqw - 120.5px);
+  --game-y: 302.5px;
+}
+.orbit {
+  animation: orbit-sway 14s ease-in-out infinite alternate;
+}
+.orbit-two {
+  animation-direction: alternate-reverse;
+}
+.hero-wire {
+  --dx: calc(var(--x2) - var(--x1));
+  --dy: calc(var(--y2) - var(--y1));
+  position: absolute;
+  left: var(--x1);
+  top: var(--y1);
+  width: hypot(var(--dx), var(--dy));
+  height: 4px;
+  margin-top: -2px;
+  rotate: atan2(var(--dy), var(--dx));
+  transform-origin: 0 50%;
+  background: repeating-linear-gradient(90deg, var(--line) 0 7px, transparent 7px 13px);
+}
+.hero-wire::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--teal);
+  clip-path: inset(0 100% 0 0);
+  animation: wire-draw var(--turn-cycle) linear var(--wire-delay) infinite;
+}
+.wire-software {
+  --x1: var(--bot-x);
+  --y1: var(--bot-y);
+  --x2: var(--monitor-x);
+  --y2: var(--monitor-y);
+  --wire-delay: -6.8s;
+}
+.wire-games {
+  --x1: var(--monitor-x);
+  --y1: var(--monitor-y);
+  --x2: var(--game-x);
+  --y2: var(--game-y);
+  --wire-delay: -3.8s;
+}
+.wire-ia {
+  --x1: var(--game-x);
+  --y1: var(--game-y);
+  --x2: var(--bot-x);
+  --y2: var(--bot-y);
+  --wire-delay: -0.8s;
+}
 .hero-art .sticker {
-  animation: sticker-float 6s ease-in-out infinite;
+  --turn-delay: -6s;
+  animation:
+    sticker-float var(--float-duration, 6s) ease-in-out var(--float-delay, 0s) infinite,
+    sticker-turn var(--turn-cycle) ease-in-out var(--turn-delay) infinite;
   transition:
     rotate 0.35s ease,
     box-shadow 0.35s ease;
 }
+.hero-art .sticker::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 3px solid var(--yellow);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: sticker-ring var(--turn-cycle) ease-out var(--turn-delay) infinite;
+}
+.fx {
+  opacity: 0;
+  animation: fx-turn var(--turn-cycle) step-end var(--turn-delay) infinite;
+}
+.fx-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fx-blink {
+  animation-name: fx-blink;
+}
+.fx-blink-alt {
+  animation-name: fx-blink-alt;
+}
+.fx-type {
+  stroke-dasharray: 1;
+  animation-name: fx-type;
+  animation-timing-function: linear;
+}
+.bot-visor,
+.bot-eye,
+.bot-eyes-happy,
+.bot-cheek,
+.bot-mouth {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-timing-function: ease-in-out;
+}
+.bot-visor {
+  animation-name: bot-visor;
+}
+.bot-eye {
+  animation-name: bot-eye;
+}
+.bot-eyes-happy {
+  animation-name: bot-eyes-happy;
+}
+.bot-cheek {
+  animation-name: bot-cheek;
+}
+.bot-mouth {
+  transform-origin: 50% 0;
+  animation-name: bot-mouth;
+}
+.hero-art .sticker img,
+.hero-art .sticker-fx {
+  animation: var(--art-motion, none) var(--turn-cycle) ease-in-out var(--turn-delay) infinite;
+}
 .hero-art .sticker-bot {
-  animation-duration: 5.2s;
-  animation-delay: -1.8s;
+  --turn-delay: 0s;
+  --float-duration: 5.2s;
+  --float-delay: -1.8s;
+  --art-motion: bot-joy;
 }
 .hero-art .sticker-game {
-  animation-duration: 6.7s;
-  animation-delay: -3.4s;
+  --turn-delay: -3s;
+  --float-duration: 6.7s;
+  --float-delay: -3.4s;
+  --art-motion: game-play;
 }
 .hero-art .sticker:hover {
   rotate: 5deg;
@@ -1350,10 +1783,68 @@ body {
 .spark-two {
   animation-delay: -2s;
 }
+.hero-relay {
+  top: 0;
+  left: 0;
+  width: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  font-size: 40px;
+  line-height: 1;
+  text-align: center;
+  z-index: 3;
+  scale: 0;
+  animation: relay-run var(--turn-cycle) ease-in-out infinite;
+}
+.relay-trail {
+  font-size: 26px;
+  animation-delay: 0.09s;
+}
+.relay-trail-far {
+  font-size: 17px;
+  animation-delay: 0.18s;
+}
+@media (min-width: 1500px) {
+  .hero-art {
+    --bot-x: calc(100cqw - 136px);
+    --game-x: calc(100cqw - 131.5px);
+  }
+}
+@media (max-width: 760px) {
+  .hero-art {
+    /* The phone hero clips its art, so the active sticker grows less. */
+    --turn-scale: 1.04;
+    overflow-clip-margin: 16px;
+    --bot-x: calc(100cqw - 97.5px);
+    --bot-y: 82.5px;
+    --monitor-x: 90px;
+    --monitor-y: 161px;
+    --game-x: calc(100cqw - 85px);
+    --game-y: 222px;
+  }
+  .hero-relay {
+    font-size: 30px;
+  }
+  .relay-trail {
+    font-size: 20px;
+  }
+  .relay-trail-far {
+    font-size: 13px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .orbit,
   .hero-art .sticker,
-  .hero-spark {
+  .hero-art .sticker::after,
+  .hero-art .sticker img,
+  .hero-art .sticker-fx,
+  .hero-wire::after,
+  .hero-spark,
+  .fx {
     animation: none;
+  }
+  .hero-relay,
+  .hero-wire {
+    display: none;
   }
   .hero-art .sticker:hover {
     rotate: none;
