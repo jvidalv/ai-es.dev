@@ -27,4 +27,4 @@ La presentación preferida es «Desarrollo de software y videojuegos con IA». D
 - Publicamos artículos desde Markdown en GitHub. Admiten imágenes y vídeos de YouTube; no hay una sección de vídeos independiente.
 - Mantener HTML pre-renderizado, metadatos, RSS, sitemap y fuentes Markdown para LLMs. La imagen social se genera durante el build.
 - Railway despliega automáticamente los cambios de `main`. Su contexto Docker debe seguir en la raíz del monorepo.
-- Seguir las reglas de Git y la revisión `/simplify` → `/post-work-review` de AGENTS.md. Preservar cambios ajenos.
+- Seguir las reglas de Git y la revisión `/code-review high --fix` → `/post-work-review` de AGENTS.md. Preservar cambios ajenos.
