@@ -98,5 +98,5 @@ These commands map to their corresponding tools. For example, `vp dev --port 300
 - Never run `git stash`, `git stash pop`, `git stash drop`, `git checkout -- .`, `git restore .`, `git reset --hard` or `git clean -fd`. Never force push without explicit per-push approval. Never apply database migrations autonomously. Do not bulk autofix unrelated files.
 - Use LSP/TypeScript language-service references for navigation and before signature changes. Check diagnostics after code changes.
 - Pre-commit and pre-push hooks check only; never autofix or stage files. Fix and stage explicitly. `bun run hooks:install` installs local hooks.
-- Before completing non-trivial work invoke `/simplify`, then `/post-work-review` using the actual Skill tool, and fix findings. Do not substitute a self-review. If the environment cannot invoke a skill, report that limitation.
+- Before completing non-trivial work invoke `/code-review high --fix`, then `/post-work-review` using the actual Skill tool, and fix findings. Do not substitute a self-review. If the environment cannot invoke a skill, report that limitation.
 - Run `bun run check:push-gates`, `bun run build`, and browser checks for changed interactions. Railway deploys main via its GitHub source connection. Verify explicitly requested deployments; do not modify unrelated services.
