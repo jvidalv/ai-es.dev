@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowUpRight, ArrowRight, Menu, X, Moon, Sun, ChevronRight, Rss } from "lucide-react";
 import { SocialIcon } from "./components/social-icon";
+import { BotFx, GameFx, MonitorFx } from "./components/sticker-fx";
 import { YoutubeEmbed } from "./components/youtube-embed";
 import { posts } from "./generated/content";
 import { site, topics, postPath, dateLabel, routes, topicPath, isTopic } from "./lib/site";
@@ -193,15 +194,24 @@ function Home() {
           <div className="dot-field" />
           <span className="hero-spark spark-one">✦</span>
           <span className="hero-spark spark-two">✧</span>
+          <span className="hero-wire wire-software" />
+          <span className="hero-wire wire-games" />
+          <span className="hero-wire wire-ia" />
           <div className="sticker sticker-monitor">
             <Illustration icon="08" />
+            <MonitorFx />
           </div>
           <div className="sticker sticker-bot">
             <Illustration icon="03" />
+            <BotFx />
           </div>
           <div className="sticker sticker-game">
             <Illustration icon="05" />
+            <GameFx />
           </div>
+          <span className="hero-spark hero-relay">✦</span>
+          <span className="hero-spark hero-relay relay-trail">✦</span>
+          <span className="hero-spark hero-relay relay-trail-far">✦</span>
         </div>
       </section>
       <section className="section container">
