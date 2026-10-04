@@ -39,6 +39,8 @@ for (const page of [
   },
 ]) {
   const url = `${site.origin}${page.path}`;
+  const isHome = page.path === routes.home.path;
+  const isNotFound = page.path === "/404.html";
   const post = posts.find((entry) => postPath(entry) === page.path);
   const structured = post
     ? {
@@ -58,8 +60,12 @@ for (const page of [
       }
     : {
         "@context": "https://schema.org",
-        "@type": page.path === "/" ? "WebSite" : "CollectionPage",
-        name: page.title,
+        "@type": isHome
+          ? "WebSite"
+          : page.path === routes.community.path
+            ? "AboutPage"
+            : "CollectionPage",
+        name: isHome ? site.name : page.title,
         url,
         inLanguage: "es",
         description: page.description,
@@ -79,21 +85,17 @@ for (const page of [
             },
           ]
         : []),
-      ...(page.path === "/"
-        ? []
-        : [
-            {
-              "@type": "ListItem",
-              position: post ? 3 : 2,
-              name: post?.title ?? page.title,
-              item: url,
-            },
-          ]),
+      {
+        "@type": "ListItem",
+        position: post ? 3 : 2,
+        name: post?.title ?? page.title,
+        item: url,
+      },
     ],
   };
+  const jsonLd = JSON.stringify(isHome ? [structured] : [structured, breadcrumb]);
   const seo = `<meta name="description" content="${escape(page.description)}" />
-    ${page.path === "/404.html" ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" href="${escape(url)}" />`}
-    ${page.path === "/404.html" ? "" : `<link rel="alternate" type="text/markdown" href="${escape(url)}index.md" />`}
+    ${isNotFound ? '<meta name="robots" content="noindex" />' : `<meta name="robots" content="max-image-preview:large" /><link rel="canonical" href="${escape(url)}" /><link rel="alternate" type="text/markdown" href="${escape(url)}index.md" />`}
     <link rel="describedby" href="/llms.txt" />
     <meta property="og:title" content="${escape(page.title)}" />
     <meta property="og:description" content="${escape(page.description)}" />
@@ -109,7 +111,7 @@ for (const page of [
     <meta name="twitter:card" content="${post ? "summary" : "summary_large_image"}" />
     <meta name="twitter:title" content="${escape(page.title)}" />
     <meta name="twitter:description" content="${escape(page.description)}" />
-    <script type="application/ld+json">${JSON.stringify([structured, breadcrumb]).replace(/</g, "\\u003c")}</script>`;
+    ${isNotFound ? "" : `<script type="application/ld+json">${jsonLd.replace(/</g, "\\u003c")}</script>`}`;
   const html = template
     .replace(/<title>.*?<\/title>/, () => `<title>${escape(page.title)}</title>`)
     .replace("<!--seo-->", () => seo)
@@ -117,10 +119,10 @@ for (const page of [
       '<div id="root"></div>',
       () => `<div id="root">${renderToString(createElement(App, { path: page.path }))}</div>`,
     );
-  const file = page.path === "/404.html" ? "dist/404.html" : join("dist", page.path, "index.html");
+  const file = isNotFound ? "dist/404.html" : join("dist", page.path, "index.html");
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, html);
-  if (page.path !== "/404.html") {
+  if (!isNotFound) {
     const selectedPosts = posts.filter(
       (entry) => !page.path.startsWith("/temas/") || page.path === topicPath(entry.topic),
     );

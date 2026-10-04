@@ -111,11 +111,15 @@ El build genera desde las mismas publicaciones visibles:
 - `/feed.xml`, para lectores RSS.
 - `/llms.txt`, índice breve en Markdown.
 - `/llms-full.txt`, copia completa del contenido público.
-- `index.md` junto a cada página, con su fuente canónica. Los enlaces del artículo conservan sus rutas originales, relativas a `https://ai-es.dev`. El HTML anuncia esta alternativa con `rel="alternate"` y `type="text/markdown"`.
+- `index.md` junto a cada página, con su fuente canónica. El servidor usa esa fuente generada para la cabecera HTTP `Link` con `rel="canonical"`, que apunta al HTML. Los enlaces del artículo conservan sus rutas originales, relativas a `https://ai-es.dev`. El HTML anuncia esta alternativa con `rel="alternate"` y `type="text/markdown"`.
 
 No se bloquean rastreadores en robots.txt. `llms.txt` es una convención complementaria, no una garantía de indexación o aparición en respuestas. No se inventan fechas de actualización ni valoraciones para obtener resultados enriquecidos. Mantener el nombre del archivo al editar títulos para conservar la URL. Cambiar un slug requiere implementar una redirección en el servidor.
 
-Después de conectar el dominio, verificarlo en Google Search Console y Bing Webmaster Tools y enviar `https://ai-es.dev/sitemap.xml`. Esto necesita acceso a las cuentas del propietario. Revisar el tráfico real antes de añadir analítica; actualmente no se instala seguimiento.
+La propiedad de dominio `ai-es.dev` está verificada en Google Search Console y el sitemap se envió el 4 de octubre de 2026. Consultar el [informe de sitemaps](https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aai-es.dev) para comprobar su lectura: la confirmación de envío no significa que Google lo haya procesado ni indexado. Si aparece un error, comprobar el acceso público a `/sitemap.xml` y `/robots.txt`, y usar la prueba de URL publicada de Search Console antes de cambiar DNS o volver a enviarlo. No hace falta reenviarlo con cada artículo; su URL se mantiene y el build actualiza el contenido.
+
+El nombre `WebSite` es `ai-es`, separado del título de la portada; la página de comunidad usa `AboutPage`. Las páginas públicas permiten vistas previas grandes de imágenes. La página 404 no incluye datos estructurados y sus respuestas llevan `noindex`. El build comprueba que sitemap, RSS y fuentes LLM coinciden con las páginas y publicaciones generadas.
+
+Google aplica los [principios habituales de SEO a sus funciones de IA](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide); `llms.txt` no es un requisito ni una señal de posicionamiento de Google. Bing Webmaster Tools queda pendiente de configurar si se quiere utilizar. Revisar el tráfico real antes de añadir analítica; actualmente no se instala seguimiento.
 
 ## Railway y Cloudflare
 

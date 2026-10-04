@@ -3,6 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 
 const root = resolve("dist");
+const notFound = resolve(root, "404.html");
 const mime: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -22,6 +23,7 @@ const mime: Record<string, string> = {
   ".woff": "font/woff",
   ".woff2": "font/woff2",
 };
+const spanish = new Set([".html", ".md", ".txt", ".xml"]);
 const server = createServer(async (request, response) => {
   response.setHeader("X-Content-Type-Options", "nosniff");
   response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -46,7 +48,7 @@ const server = createServer(async (request, response) => {
   }
   let file = resolve(root, `.${pathname}`);
   if (file !== root && !file.startsWith(`${root}${sep}`)) {
-    response.writeHead(404).end("Not found");
+    response.writeHead(404, { "X-Robots-Tag": "noindex" }).end("Not found");
     return;
   }
   try {
@@ -62,9 +64,16 @@ const server = createServer(async (request, response) => {
       }
       file = resolve(file, "index.html");
     }
+    if (file === notFound) throw new Error("Not found");
     const body = await readFile(file);
+    const extension = extname(file);
+    if (extension === ".md") {
+      const canonical = /^Fuente: (https:\/\/[^\s<>"]+)$/m.exec(body.toString("utf8"))?.[1];
+      if (canonical) response.setHeader("Link", `<${canonical}>; rel="canonical"`);
+    }
+    if (spanish.has(extension)) response.setHeader("Content-Language", "es");
     response.writeHead(200, {
-      "Content-Type": mime[extname(file)] ?? "application/octet-stream",
+      "Content-Type": mime[extension] ?? "application/octet-stream",
       "Cache-Control": pathname.startsWith("/assets/")
         ? "public, max-age=31536000, immutable"
         : "public, max-age=0, must-revalidate",
@@ -72,10 +81,12 @@ const server = createServer(async (request, response) => {
     });
     response.end(request.method === "HEAD" ? undefined : body);
   } catch {
-    const body = await readFile(resolve(root, "404.html")).catch(() => Buffer.from("Not found"));
+    const body = await readFile(notFound).catch(() => Buffer.from("Not found"));
     response.writeHead(404, {
       "Content-Type": "text/html; charset=utf-8",
+      "Content-Language": "es",
       "Cache-Control": "no-cache",
+      "X-Robots-Tag": "noindex",
     });
     response.end(request.method === "HEAD" ? undefined : body);
   }
