@@ -133,6 +133,6 @@ Ver [AGENTS.md](AGENTS.md). Se adaptaron de Berrus los gates de comentarios, con
 
 `bun run check` genera el contenido y agrupa formato, lint y tipos. `bun run test` prueba la frontera de publicación, la limpieza de HTML y los vídeos. `bun run verify:build` comprueba HTML, metadatos y enlaces de la salida generada. GitHub Actions ejecuta gates, build y verificación en cada PR/push a main.
 
-El estilo de los iconos sociales se dibuja con Canvas 2D en `apps/web/src/lib/social-art.ts`, siguiendo la paleta y las formas de Berrus. Los PNG facilitados por el propietario conservan su formato original. El movimiento respeta `prefers-reduced-motion`.
+El estilo de los iconos sociales se dibuja con Canvas 2D en `apps/web/src/lib/social-art.ts`, siguiendo la paleta y las formas de Berrus. Los PNG facilitados por el propietario conservan su formato original. Las reacciones animadas de la portada son capas SVG en `apps/web/src/components/sticker-fx.tsx`, dibujadas encima de los PNG con esa misma paleta. El movimiento respeta `prefers-reduced-motion`.
 
 El repositorio es público. No se concede una licencia de reutilización del código o las ilustraciones por el mero hecho de publicarlo; el propietario puede añadir la licencia que prefiera.
