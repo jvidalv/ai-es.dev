@@ -288,8 +288,8 @@ button:focus-visible {
   inset: 64px -9px 60px 7px;
   transform: rotate(22deg);
 }
-/* The rotated orbit boxes reach past the page edge at tablet widths; clip them so the page never
-   scrolls sideways. Home only, so other pages keep surfacing their own overflow. */
+/* The rotated orbit boxes reach past the page edge between 761 and 1100 px; clip them so the page
+   never scrolls sideways. Home only, so other pages keep surfacing their own overflow. */
 main:has(> .hero) {
   overflow-x: clip;
 }
