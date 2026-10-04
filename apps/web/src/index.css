@@ -288,6 +288,11 @@ button:focus-visible {
   inset: 64px -9px 60px 7px;
   transform: rotate(22deg);
 }
+/* The rotated orbit boxes reach past the page edge at tablet widths; clip them so the page never
+   scrolls sideways. Home only, so other pages keep surfacing their own overflow. */
+main:has(> .hero) {
+  overflow-x: clip;
+}
 .dot-field {
   position: absolute;
   inset: 10px;
