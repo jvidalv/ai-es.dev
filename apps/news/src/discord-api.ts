@@ -1,10 +1,12 @@
 import { setTimeout as sleep } from "node:timers/promises";
 import { z } from "zod";
 
+// GitHub Actions passes an unset variable as an empty string, so empty means absent.
+const id = z.string().regex(/^\d*$/);
 const env = z.object({
   DISCORD_TOKEN: z.string().min(1),
-  NEWS_CHANNEL_ID: z.string().regex(/^\d+$/),
-  NEWS_ALERT_USER_ID: z.string().regex(/^\d+$/),
+  NEWS_CHANNEL_ID: id.optional(),
+  NEWS_ALERT_USER_ID: id.optional(),
 });
 const rateLimit = z.object({ retry_after: z.number() });
 const channel = z.object({ id: z.string() });
@@ -50,11 +52,13 @@ export async function discord({
 // A failed alert must never hide the error that caused it.
 export async function alert(message: string) {
   try {
+    const recipient = discordConfig().NEWS_ALERT_USER_ID;
+    if (!recipient) throw new Error("falta NEWS_ALERT_USER_ID");
     const dm = channel.parse(
       await discord({
         method: "POST",
         path: "/users/@me/channels",
-        body: { recipient_id: discordConfig().NEWS_ALERT_USER_ID },
+        body: { recipient_id: recipient },
       }),
     );
     await discord({

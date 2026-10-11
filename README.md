@@ -108,7 +108,7 @@ El registro tiene esta forma:
 }
 ```
 
-- No escribir estos resúmenes a mano. Sí se puede corregir o borrar una línea equivocada: la web se actualiza con el commit y Discord no vuelve a publicar un día que ya está en el canal.
+- No escribir estos resúmenes a mano. Sí se puede corregir o borrar una línea equivocada: la web se actualiza con el commit. Discord no vuelve a publicar el día mientras conserve algún enlace de los que ya están en el canal, y el mensaje publicado no se edita.
 - `subject` admite 40 caracteres y `fact` 120, en una sola línea y sin corchetes ni barras invertidas. La web añade el punto final si falta. `url` debe ser un post de `x.com` y no puede repetirse en el mismo día. El nombre del archivo debe coincidir con `date`. Un archivo inválido bloquea el build.
 - La portada muestra los 3 últimos días y `/noticias/` los 30 más recientes. Los archivos anteriores se quedan en el repositorio.
 - Cada día admite de 1 a 8 noticias.
@@ -118,7 +118,7 @@ El registro tiene esta forma:
 
 ### Generador
 
-`bun run news:generate` necesita la CLI `grok` con sesión iniciada, así que se ejecuta en el servidor que la tiene, desde un checkout de `main` con permiso de push. Hace `git pull`, no genera nada si el registro del día ya existe, descarta los posts que no puede verificar o que ya salieron en los últimos 14 días, valida el registro con el mismo lector que usa el build y hace commit y push. Si no queda ninguna noticia, ese día no hay registro. `--dry-run` muestra el registro sin escribirlo.
+`bun run news:generate` necesita la CLI `grok` con sesión iniciada, así que se ejecuta en el servidor que la tiene, desde un checkout de `main` con permiso de push. Actualiza el checkout y sube antes cualquier registro que una ejecución anterior no pudo publicar. No genera nada si el registro del día ya existe. Descarta los posts que no puede verificar o que ya salieron en los 14 registros anteriores, valida el registro con el mismo lector que usa el build y hace commit y push. La verificación confirma que el post existe y es de esa cuenta; no comprueba que el resumen sea fiel al post. Si no queda ninguna noticia, ese día no hay registro. `--dry-run` muestra el registro sin escribirlo.
 
 ```cron
 0 9 * * * root cd /opt/ai-es.dev && flock -n /run/ai-es-news.lock timeout 1500 bun --env-file=/opt/ai-es-news/news.env run news:generate >>/var/log/ai-es-news.log 2>&1
@@ -126,7 +126,7 @@ El registro tiene esta forma:
 
 ### Consumidor de Discord
 
-`bun run news:discord` lee de `origin/main` el registro de hoy, o el de la fecha que reciba como argumento, y publica el embed. Antes mira los últimos mensajes del canal: si el primer enlace del día ya está, no publica. Por eso se puede lanzar varias veces y desde varios sitios sin duplicar.
+`bun run news:discord` lee de `origin/main` los registros de los 3 últimos días y publica los que falten en el canal, del más antiguo al más reciente. Para saber si un día falta mira los 100 últimos mensajes: si alguno de sus enlaces ya está, no lo publica. Por eso se puede lanzar varias veces y desde varios sitios sin duplicar, y un registro que llega tarde a `main` también se entrega.
 
 - En GitHub Actions lo lanza `news-discord.yml` con cada push a `main` que toca `packages/content/news/`. Necesita el secreto `NEWS_DISCORD_TOKEN` y las variables `NEWS_CHANNEL_ID` y `NEWS_ALERT_USER_ID`. Sin el secreto, el workflow termina con un aviso y no publica.
 - Mientras el repositorio no tenga ese secreto, el servidor del generador lanza el mismo comando después de generar.

@@ -14,6 +14,8 @@ describe("generator", () => {
   it("takes the final answer and ignores progress objects and braces inside strings", () => {
     const text = `{"status":"buscando {posts}"} texto {"items":[]} ${JSON.stringify({ items: [post("1")] })}`;
     expect(extractCandidates(text)).toEqual([post("1")]);
+    const trailing = `${JSON.stringify({ items: [post("1")] })} {"debug":{"items":[]}}`;
+    expect(extractCandidates(trailing)).toEqual([post("1")]);
     expect(extractCandidates("sin respuesta")).toBeNull();
   });
   it("never repeats a post from an earlier day or twice in the same day", () => {
@@ -38,16 +40,18 @@ describe("generator", () => {
       seen: new Set(),
     });
     expect(source).toContain('"subject": "Un (modelo)"');
-    expect(source).toContain('"fact": "publica pesos , abiertos"');
+    expect(source).toContain('"fact": "publica pesos, abiertos"');
   });
 });
 
 describe("Discord consumer", () => {
-  it("renders the record it is given, with each link and one final period per line", () => {
-    const embed = renderEmbed({ date: "2026-01-02", items: [post("1"), post("2")] });
-    expect(embed.description.split("\n")).toEqual([
-      "• **[Un modelo](https://x.com/alguien/status/1)** publica pesos abiertos.",
-      "• **[Un modelo](https://x.com/alguien/status/2)** publica pesos abiertos.",
-    ]);
+  it("keeps each link reachable and shows formatting characters from posts as typed", () => {
+    const embed = renderEmbed({
+      date: "2026-01-02",
+      items: [post("1", { subject: "**Un_modelo" }), post("2")],
+    });
+    const lines = embed.description.split("\n");
+    expect(lines[0]).toContain(String.raw`[\*\*Un\_modelo](https://x.com/alguien/status/1)`);
+    expect(lines[1]).toContain("(https://x.com/alguien/status/2)");
   });
 });

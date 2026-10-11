@@ -35,14 +35,19 @@ export function extractCandidates(text: string): Candidate[] | null {
   while (index !== -1) {
     const end = objectEnd(text, index);
     let parsed: unknown;
+    let next = index + 1;
     try {
-      parsed = end === -1 ? undefined : JSON.parse(text.slice(index, end));
+      if (end !== -1) {
+        parsed = JSON.parse(text.slice(index, end));
+        // A whole object was read, so its nested objects are not answers of their own.
+        next = end;
+      }
     } catch {
       parsed = undefined;
     }
     const result = answer.safeParse(parsed);
     if (result.success) found = result.data.items;
-    index = text.indexOf("{", result.success ? end : index + 1);
+    index = text.indexOf("{", next);
   }
   return (
     found?.flatMap((entry) => {
@@ -62,15 +67,21 @@ export async function runGrok({ today, maxItems }: { today: string; maxItems: nu
   try {
     ({ stdout } = await run("grok", ["-p", prompt, "--output-format", "json"], {
       cwd,
+      // Grok reads untrusted posts and can run commands: it gets no secret from this process.
+      env: { PATH: process.env.PATH, HOME: process.env.HOME },
       timeout: timeoutSeconds * 1000,
       maxBuffer: 64 * 1024 * 1024,
     }));
   } catch (error) {
-    const timedOut = error instanceof Error && "killed" in error && error.killed === true;
-    throw new Error(
-      timedOut ? `grok no terminó en ${timeoutSeconds} s` : "grok terminó con un error",
-      { cause: error },
-    );
+    if (error instanceof Error && "killed" in error && error.killed === true) {
+      throw new Error(`grok no terminó en ${timeoutSeconds} s`);
+    }
+    const stderr =
+      error instanceof Error && "stderr" in error && typeof error.stderr === "string"
+        ? error.stderr.trim().slice(-300)
+        : "";
+    // The child-process message repeats the whole prompt, so only stderr reaches the alert.
+    throw new Error(`grok terminó con un error: ${stderr || "sin salida de error"}`);
   }
   const data: unknown = JSON.parse(stdout);
   const { text, total_cost_usd: cost } = output.parse(data);
