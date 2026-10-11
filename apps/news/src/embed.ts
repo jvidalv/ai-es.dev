@@ -17,3 +17,8 @@ export function renderEmbed(day: NewsDay) {
     footer: { text: "Fuente: posts en X" },
   };
 }
+
+// Any link of the day counts, so correcting one line of a record never sends the day again.
+export function isSent({ day, texts }: { day: NewsDay; texts: string[] }) {
+  return day.items.some((item) => texts.some((text) => text.includes(`(${item.url})`)));
+}

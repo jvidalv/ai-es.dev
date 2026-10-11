@@ -28,9 +28,10 @@ function objectEnd(text: string, start: number) {
   return -1;
 }
 
-// Grok sometimes prints progress objects before the answer, so the last one with items wins.
+// Grok prints other objects around the answer. The last list that holds real candidates wins,
+// so a closing object with an empty or unrelated items list cannot erase it.
 export function extractCandidates(text: string): Candidate[] | null {
-  let found: unknown[] | null = null;
+  let found: Candidate[] | null = null;
   let index = text.indexOf("{");
   while (index !== -1) {
     const end = objectEnd(text, index);
@@ -46,15 +47,16 @@ export function extractCandidates(text: string): Candidate[] | null {
       parsed = undefined;
     }
     const result = answer.safeParse(parsed);
-    if (result.success) found = result.data.items;
+    if (result.success) {
+      const candidates = result.data.items.flatMap((entry) => {
+        const item = candidate.safeParse(entry);
+        return item.success ? [item.data] : [];
+      });
+      if (candidates.length > 0 || !found) found = candidates;
+    }
     index = text.indexOf("{", next);
   }
-  return (
-    found?.flatMap((entry) => {
-      const result = candidate.safeParse(entry);
-      return result.success ? [result.data] : [];
-    }) ?? null
-  );
+  return found;
 }
 
 export async function runGrok({ today, maxItems }: { today: string; maxItems: number }) {
