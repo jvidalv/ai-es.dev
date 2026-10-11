@@ -8,7 +8,7 @@ export function postId(url: string) {
 }
 
 // The record feeds Markdown exports and a Discord embed, so link syntax and dashes are flattened.
-export function clean({ text, limit }: { text: string; limit: number }) {
+function clean({ text, limit }: { text: string; limit: number }) {
   const flat = text
     .replace(/\s*—\s*/g, ", ")
     .replaceAll("–", "-")
