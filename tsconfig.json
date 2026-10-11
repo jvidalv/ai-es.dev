@@ -11,6 +11,9 @@
       "path": "./packages/content"
     },
     {
+      "path": "./apps/news"
+    },
+    {
       "path": "./tsconfig.node.json"
     }
   ],

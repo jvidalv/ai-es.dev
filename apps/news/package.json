@@ -1,0 +1,20 @@
+{
+  "name": "@ai-es/news",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun src/generate.ts",
+    "discord": "bun src/discord.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-es/content": "workspace:*",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "~6.0.2",
+    "vite-plus": "1.0.0"
+  }
+}

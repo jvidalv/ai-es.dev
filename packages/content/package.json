@@ -6,6 +6,7 @@
   "exports": {
     "./loader": "./src/loader.ts",
     "./news": "./src/news.ts",
+    "./news-text": "./src/news-text.ts",
     "./types": "./src/types.ts"
   },
   "scripts": {

@@ -4,17 +4,8 @@ import { SocialIcon } from "./components/social-icon";
 import { BotFx, GameFx, MonitorFx } from "./components/sticker-fx";
 import { YoutubeEmbed } from "./components/youtube-embed";
 import { news, posts } from "./generated/content";
-import {
-  site,
-  topics,
-  postPath,
-  dateLabel,
-  dayLabel,
-  newsSentence,
-  routes,
-  topicPath,
-  isTopic,
-} from "./lib/site";
+import { site, topics, postPath, dateLabel, routes, topicPath, isTopic } from "./lib/site";
+import { dayLabel, newsSentence } from "@ai-es/content/news-text";
 import type { NewsDay, Post, Topic } from "@ai-es/content/types";
 
 function Illustration({ icon, className = "" }: { icon: Post["icon"]; className?: string }) {
