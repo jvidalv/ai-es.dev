@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { renderEmbed } from "./embed.ts";
+import { isSent, renderEmbed } from "./embed.ts";
 import { extractCandidates } from "./grok.ts";
 import { buildRecord } from "./record.ts";
 
@@ -16,6 +16,11 @@ describe("generator", () => {
     expect(extractCandidates(text)).toEqual([post("1")]);
     const trailing = `${JSON.stringify({ items: [post("1")] })} {"debug":{"items":[]}}`;
     expect(extractCandidates(trailing)).toEqual([post("1")]);
+    for (const closing of ['{"items":[]}', '{"items":[{"status":"done"}]}']) {
+      const answer = `${JSON.stringify({ items: [post("1")] })} ${closing}`;
+      expect(extractCandidates(answer)).toEqual([post("1")]);
+    }
+    expect(extractCandidates('{"items":[]}')).toEqual([]);
     expect(extractCandidates("sin respuesta")).toBeNull();
   });
   it("never repeats a post from an earlier day or twice in the same day", () => {
@@ -42,6 +47,16 @@ describe("generator", () => {
     expect(source).toContain('"subject": "Un (modelo)"');
     expect(source).toContain('"fact": "publica pesos, abiertos"');
   });
+  it("drops lines with no words and never cuts an emoji in half", () => {
+    const long = `${"a".repeat(118)}😀 y sigue`;
+    const source = buildRecord({
+      date: "2026-01-02",
+      candidates: [post("1", { fact: ".".repeat(200) }), post("2", { fact: long })],
+      seen: new Set(),
+    });
+    expect(source).not.toContain("/status/1");
+    expect(source).toContain(`"fact": "${"a".repeat(118)}…"`);
+  });
 });
 
 describe("Discord consumer", () => {
@@ -53,5 +68,16 @@ describe("Discord consumer", () => {
     const lines = embed.description.split("\n");
     expect(lines[0]).toContain(String.raw`[\*\*Un\_modelo](https://x.com/alguien/status/1)`);
     expect(lines[1]).toContain("(https://x.com/alguien/status/2)");
+  });
+  it("recognises a day it already sent and does not confuse a longer post id", () => {
+    const day = { date: "2026-01-02", items: [post("12"), post("34")] };
+    expect(isSent({ day, texts: [renderEmbed(day).description] })).toBe(true);
+    expect(isSent({ day, texts: [renderEmbed({ ...day, items: [post("34")] }).description] })).toBe(
+      true,
+    );
+    const other = { date: "2026-01-02", items: [post("123")] };
+    expect(isSent({ day, texts: [renderEmbed(other).description, "charla sin enlaces"] })).toBe(
+      false,
+    );
   });
 });

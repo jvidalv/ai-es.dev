@@ -118,18 +118,18 @@ El registro tiene esta forma:
 
 ### Generador
 
-`bun run news:generate` necesita la CLI `grok` con sesión iniciada, así que se ejecuta en el servidor que la tiene, desde un checkout de `main` con permiso de push. Actualiza el checkout y sube antes cualquier registro que una ejecución anterior no pudo publicar. No genera nada si el registro del día ya existe. Descarta los posts que no puede verificar o que ya salieron en los 14 registros anteriores, valida el registro con el mismo lector que usa el build y hace commit y push. La verificación confirma que el post existe y es de esa cuenta; no comprueba que el resumen sea fiel al post. Si no queda ninguna noticia, ese día no hay registro. `--dry-run` muestra el registro sin escribirlo.
+`bun run news:generate` necesita la CLI `grok` con sesión iniciada y la CLI `gh` con permiso de escritura en el repositorio, así que se ejecuta en el servidor que las tiene, desde un checkout de `main`. No genera nada si el registro del día ya está en `main`. Descarta los posts que no puede verificar o que ya salieron en los 14 registros anteriores, valida el registro con el mismo lector que usa el build y lo publica con un único commit hecho por la API de GitHub. El checkout nunca tiene commits locales: solo se usa para ejecutar el código y leer `origin/main`. La verificación confirma que el post existe y es de esa cuenta; no comprueba que el resumen sea fiel al post. Si no queda ninguna noticia, ese día no hay registro. `--dry-run` muestra el registro sin escribirlo.
 
 ```cron
-0 9 * * * root cd /opt/ai-es.dev && flock -n /run/ai-es-news.lock timeout 1500 bun --env-file=/opt/ai-es-news/news.env run news:generate >>/var/log/ai-es-news.log 2>&1
+0 9 * * * root cd /opt/ai-es.dev && flock -n /run/ai-es-news.lock sh -c 'git pull -q --ff-only && bun install --frozen-lockfile >/dev/null && timeout 1500 bun --env-file=/opt/ai-es-news/news.env run news:generate' >>/var/log/ai-es-news.log 2>&1
 ```
 
 ### Consumidor de Discord
 
-`bun run news:discord` lee de `origin/main` los registros de los 3 últimos días y publica los que falten en el canal, del más antiguo al más reciente. Para saber si un día falta mira los 100 últimos mensajes: si alguno de sus enlaces ya está, no lo publica. Por eso se puede lanzar varias veces y desde varios sitios sin duplicar, y un registro que llega tarde a `main` también se entrega.
+`bun run news:discord` lee de `origin/main` los registros de los 3 últimos días y publica los que falten en el canal, del más antiguo al más reciente. Para saber si un día falta lee los mensajes del canal hasta el primer día de esa ventana, justo antes de publicar: si alguno de los enlaces del día ya está, no lo publica. Por eso se puede reintentar sin duplicar, y un registro que llega uno o dos días tarde a `main` también se entrega.
 
 - En GitHub Actions lo lanza `news-discord.yml` con cada push a `main` que toca `packages/content/news/`. Necesita el secreto `NEWS_DISCORD_TOKEN` y las variables `NEWS_CHANNEL_ID` y `NEWS_ALERT_USER_ID`. Sin el secreto, el workflow termina con un aviso y no publica.
-- Mientras el repositorio no tenga ese secreto, el servidor del generador lanza el mismo comando después de generar.
+- Mientras el repositorio no tenga ese secreto, el servidor del generador lanza el mismo comando después de generar. Usar un solo sitio: al añadir el secreto, quitar el comando del servidor, porque dos ejecuciones en el mismo segundo podrían publicar las dos.
 
 Las variables están en [`apps/news/.env.example`](apps/news/.env.example). Si el generador o el consumidor fallan, avisan por mensaje directo a `NEWS_ALERT_USER_ID`.
 

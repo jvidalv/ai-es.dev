@@ -1,9 +1,7 @@
 import { execFile } from "node:child_process";
-import { writeFile } from "node:fs/promises";
-import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { setTimeout as sleep } from "node:timers/promises";
 import { promisify } from "node:util";
-import { newsDirectory } from "@ai-es/content/news";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("../../../", import.meta.url));
@@ -14,19 +12,34 @@ export function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
+export function daysAgo(days: number) {
+  return new Date(Date.now() - days * 86_400_000).toISOString().slice(0, 10);
+}
+
 export function log(message: string) {
   console.log(`[${new Date().toISOString().slice(0, 19)}] ${message}`);
 }
 
-async function git(args: string[]) {
-  const { stdout } = await run("git", ["-C", root, ...args]);
-  return stdout.trim();
+async function tool({ command, args }: { command: string; args: string[] }) {
+  try {
+    return (await run(command, args, { cwd: root })).stdout.trim();
+  } catch (error) {
+    const stderr =
+      error instanceof Error && "stderr" in error && typeof error.stderr === "string"
+        ? error.stderr.trim().slice(-300)
+        : "";
+    // The child-process message repeats every argument, so only stderr reaches the alert.
+    throw new Error(`${command} ${args[0] ?? ""} falló: ${stderr || "sin salida de error"}`);
+  }
 }
 
-// Consumers read records from main, never from the generator's working files.
+// Main is the only source: the generator and the consumers read records from it, never from files.
 export async function publishedRecords(since: string) {
-  await git(["fetch", "--quiet", "origin", "main"]);
-  const files = await git(["ls-tree", "--name-only", "origin/main", recordsPath]);
+  await tool({ command: "git", args: ["fetch", "--quiet", "origin", "main"] });
+  const files = await tool({
+    command: "git",
+    args: ["ls-tree", "--name-only", "origin/main", recordsPath],
+  });
   const dates = files
     .split("\n")
     .flatMap((file) => /(\d{4}-\d{2}-\d{2})\.json$/.exec(file)?.[1] ?? [])
@@ -35,39 +48,38 @@ export async function publishedRecords(since: string) {
   return Promise.all(
     dates.map(async (date) => ({
       date,
-      source: await git(["show", `origin/main:${recordPath(date)}`]),
+      source: await tool({ command: "git", args: ["show", `origin/main:${recordPath(date)}`] }),
     })),
   );
 }
 
-async function rebaseOntoMain() {
-  try {
-    await git(["pull", "--quiet", "--rebase", "origin", "main"]);
-  } catch (error) {
-    // A rebase left half done detaches HEAD and would block every later run.
-    await git(["rebase", "--abort"]).catch(() => undefined);
-    throw error;
-  }
+export async function onMain() {
+  return (await tool({ command: "git", args: ["rev-parse", "--abbrev-ref", "HEAD"] })) === "main";
 }
 
-export async function syncMain() {
-  if ((await git(["rev-parse", "--abbrev-ref", "HEAD"])) !== "main") {
-    throw new Error("El generador solo publica desde un checkout de main");
-  }
-  // A commit that exists only here is a record an earlier run could not push: publish it first.
-  await rebaseOntoMain();
-  await git(["push", "--quiet", "origin", "HEAD:main"]);
-}
-
-export async function commitRecord({ date, source }: { date: string; source: string }) {
-  await writeFile(join(newsDirectory, `${date}.json`), source);
-  await git(["add", recordPath(date)]);
-  await git(["commit", "--quiet", "-m", `Add AI news for ${date}`, "--", recordPath(date)]);
-  try {
-    await git(["push", "--quiet", "origin", "HEAD:main"]);
-  } catch {
-    // Someone pushed to main during the search: replay the record on top and try once more.
-    await rebaseOntoMain();
-    await git(["push", "--quiet", "origin", "HEAD:main"]);
+// One commit made through the GitHub API: the checkout never holds a local commit to push,
+// rebase or leave half done, and nothing but the record can reach main.
+export async function publishRecord({ date, source }: { date: string; source: string }) {
+  const args = [
+    "api",
+    "--silent",
+    "--method",
+    "PUT",
+    `repos/{owner}/{repo}/contents/${recordPath(date)}`,
+    "-f",
+    `message=Add AI news for ${date}`,
+    "-f",
+    "branch=main",
+    "-f",
+    `content=${Buffer.from(source).toString("base64")}`,
+  ];
+  for (let attempt = 1; ; attempt++) {
+    try {
+      await tool({ command: "gh", args });
+      return;
+    } catch (error) {
+      if (attempt === 3) throw error;
+      await sleep(10_000);
+    }
   }
 }
