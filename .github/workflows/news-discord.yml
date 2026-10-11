@@ -13,21 +13,29 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    env:
-      DISCORD_TOKEN: ${{ secrets.NEWS_DISCORD_TOKEN }}
-      NEWS_CHANNEL_ID: ${{ vars.NEWS_CHANNEL_ID }}
-      NEWS_ALERT_USER_ID: ${{ vars.NEWS_ALERT_USER_ID }}
     steps:
-      - name: Skip until the repository has the Discord token
-        if: env.DISCORD_TOKEN == ''
-        run: echo "::notice::NEWS_DISCORD_TOKEN is not set. The same consumer runs from the generator host instead."
+      - name: Check that the repository has the Discord token
+        id: token
+        env:
+          DISCORD_TOKEN: ${{ secrets.NEWS_DISCORD_TOKEN }}
+        run: |
+          if [ -n "$DISCORD_TOKEN" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::NEWS_DISCORD_TOKEN is not set. The same consumer runs from the generator host instead."
+          fi
       - uses: actions/checkout@v4
-        if: env.DISCORD_TOKEN != ''
+        if: steps.token.outputs.present == 'true'
       - uses: oven-sh/setup-bun@v2
-        if: env.DISCORD_TOKEN != ''
+        if: steps.token.outputs.present == 'true'
         with:
           bun-version: "1.4.2"
       - run: bun install --frozen-lockfile
-        if: env.DISCORD_TOKEN != ''
+        if: steps.token.outputs.present == 'true'
+      # The token is given to this step only, so dependency install scripts never see it.
       - run: bun run news:discord
-        if: env.DISCORD_TOKEN != ''
+        if: steps.token.outputs.present == 'true'
+        env:
+          DISCORD_TOKEN: ${{ secrets.NEWS_DISCORD_TOKEN }}
+          NEWS_CHANNEL_ID: ${{ vars.NEWS_CHANNEL_ID }}
+          NEWS_ALERT_USER_ID: ${{ vars.NEWS_ALERT_USER_ID }}
