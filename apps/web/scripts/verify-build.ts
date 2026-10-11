@@ -20,7 +20,9 @@ for (const file of htmlFiles) {
     assert.ok(html.includes("noindex"));
     assert.ok(!html.includes("application/ld+json"), "404 must not describe indexable content");
   } else {
-    const path = relative("dist", file).replace(/index\.html$/, "");
+    const path = relative("dist", file)
+      .replaceAll("\\", "/")
+      .replace(/index\.html$/, "");
     const canonical = `${site.origin}/${path}`;
     canonicalUrls.add(canonical);
     assert.ok(html.includes(`rel="canonical" href="${canonical}"`), `${file}: incorrect canonical`);
