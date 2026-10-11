@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-06",
+  "items": [
+    {
+      "subject": "Beam",
+      "fact": "presenta un modelo agentic de 501B parámetros y 23B activos; pesos abiertos este mes",
+      "url": "https://x.com/reflection_ai/status/2107186849370247235"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "añade run.steer() para dirigir agentes del SDK mientras corren",
+      "url": "https://x.com/cursor_ai/status/2107141004482793827"
+    },
+    {
+      "subject": "Devin",
+      "fact": "añade Dreaming: grafo de memoria entre sesiones y el estándar open source Agent Memory Repo",
+      "url": "https://x.com/cognition/status/2107165034463867001"
+    },
+    {
+      "subject": "Hugging Face",
+      "fact": "convierte 10 harnesses de código en entornos RL open source, sin modificarlos",
+      "url": "https://x.com/ClementDelangue/status/2107120717980471638"
+    }
+  ]
+}

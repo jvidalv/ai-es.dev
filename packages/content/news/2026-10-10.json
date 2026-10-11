@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-10",
+  "items": [
+    {
+      "subject": "Codex",
+      "fact": "lanza composer predictions en beta para Pro: sugiere el siguiente mensaje en la app de escritorio",
+      "url": "https://x.com/OpenAIDevs/status/2108624138369929725"
+    },
+    {
+      "subject": "Qwen-Image-2.1-Turbo",
+      "fact": "publica pesos abiertos de 8 pasos y APIs Pro y Turbo para generar y editar imágenes 2K",
+      "url": "https://x.com/Alibaba_Qwen/status/2108549075218120949"
+    },
+    {
+      "subject": "Devin",
+      "fact": "admite planes personales Go, Plus o Pro de ChatGPT y descuenta el uso de GPT de esa cuota",
+      "url": "https://x.com/cognition/status/2108692010056188048"
+    },
+    {
+      "subject": "Anthropic",
+      "fact": "publica un informe de cuatro comportamientos no intencionados de Claude en sistemas reales",
+      "url": "https://x.com/AnthropicAI/status/2108680150556737819"
+    }
+  ]
+}

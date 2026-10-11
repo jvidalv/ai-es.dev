@@ -25,7 +25,7 @@ Comunidad en español interesada en el desarrollo de software y videojuegos con 
 Bun 1.4.2 gestiona los workspaces, las dependencias y el servidor de producción. Node 24 ejecuta las herramientas de Vite+ 1.0. React y TypeScript estricto.
 
 - `apps/web`: web, servidor, imágenes y generación de HTML y metadatos.
-- `packages/content`: publicaciones Markdown, validación, tipos y lector de contenido. La web lo usa como `@ai-es/content` mediante `workspace:*`.
+- `packages/content`: publicaciones Markdown, resúmenes diarios de noticias, validación, tipos y lector de contenido. La web lo usa como `@ai-es/content` mediante `workspace:*`.
 - `scripts`: comprobaciones del repositorio. Un solo `bun.lock` fija las dependencias.
 
 Ejecutar los comandos desde la raíz:
@@ -36,7 +36,7 @@ bun run hooks:install
 bun run dev
 ```
 
-La web se abre en `http://localhost:5173`. Los cambios en `packages/content/posts/` se regeneran durante el desarrollo. No editar `apps/web/src/generated/`.
+La web se abre en `http://localhost:5173`. Los cambios en `packages/content/posts/` y `packages/content/news/` se regeneran durante el desarrollo. No editar `apps/web/src/generated/`.
 
 ```sh
 bun run check:push-gates
@@ -78,6 +78,31 @@ También hay listas, enlaces, citas y bloques de código.
 - Los borradores también deben tener metadatos completos y válidos. Solo se admite front matter YAML; un campo desconocido bloquea el build para evitar publicar por una errata.
 - Cambiar `draft` a `false` o eliminarlo y hacer merge a `main` publica la entrada cuando Railway termina el despliegue.
 - El título, la descripción, la fecha y los vídeos incrustados se validan. Un error bloquea el build.
+
+## Resumen diario de noticias de IA
+
+La portada y `/noticias/` muestran el resumen de noticias de IA que se publica en el canal de noticias de Discord. Cada día es un archivo `packages/content/news/AAAA-MM-DD.json`:
+
+```json
+{
+  "date": "2026-10-11",
+  "items": [
+    {
+      "subject": "Cloudflare",
+      "fact": "compra Deno para mejorar el modelo de programación de Workers",
+      "url": "https://x.com/TechCrunch/status/2108957871644012892"
+    }
+  ]
+}
+```
+
+- Un bot sube el archivo a `main` después de publicar el resumen en Discord, así que Railway despliega la web una vez al día. No escribir estos resúmenes a mano. Sí se puede corregir o borrar una línea equivocada.
+- `subject` admite 40 caracteres y `fact` 120, en una sola línea y sin corchetes ni barras invertidas. La web añade el punto final si falta. `url` debe ser un post de `x.com` y no puede repetirse en el mismo día. El nombre del archivo debe coincidir con `date`. Un archivo inválido bloquea el build.
+- La portada muestra los 3 últimos días y `/noticias/` los 30 más recientes. Los archivos anteriores se quedan en el repositorio.
+- Cada día admite de 1 a 8 noticias.
+- La ilustración de cada tarjeta depende del día de la semana: `apps/web/public/images/ai-es-news-{mon,tue,wed,thu,fri,sat,sun}.svg`, dibujadas con la paleta de `apps/web/src/lib/social-art.ts`.
+- Un día con fecha futura no se publica, igual que los artículos. La fecha se compara con el día UTC.
+- El resumen no entra en el RSS, que sigue siendo solo de publicaciones. Sí tiene su `index.md` y aparece en el sitemap y en `llms.txt`.
 
 ## Imágenes
 

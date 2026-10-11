@@ -472,9 +472,10 @@ main:has(> .hero) {
   background: #f1e5c9;
   color: #755825;
 }
-.card-body h3 {
+.card-body :is(h2, h3) {
   font-size: 22px;
   line-height: 1.25;
+  letter-spacing: -0.6px;
   margin-top: 15px;
 }
 .card-body p {
@@ -913,7 +914,7 @@ main:has(> .hero) {
   .card-meta {
     flex-wrap: wrap;
   }
-  .card-body h3 {
+  .card-body :is(h2, h3) {
     font-size: 20px;
   }
   .topic-grid {
@@ -1069,7 +1070,7 @@ main:has(> .hero) {
   .card-body {
     padding: 22px;
   }
-  .card-body h3 {
+  .card-body :is(h2, h3) {
     font-size: 23px;
   }
   .card-body p {
@@ -1893,4 +1894,57 @@ body {
 .breadcrumb,
 .footer-links a {
   min-height: 32px;
+}
+.home-news {
+  margin-top: 78px;
+}
+.news-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+.news-card.tone-1 .card-art {
+  background: var(--art-pink);
+}
+.news-card.tone-2 .card-art {
+  background: var(--art-yellow);
+}
+.news-card :is(h2, h3) {
+  margin-top: 0;
+}
+.news-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+.news-list li {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.news-list a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline 2px var(--teal);
+  text-underline-offset: 4px;
+}
+.news-list a:hover {
+  color: var(--teal);
+}
+.news-source {
+  font-size: 12px;
+  margin-top: 18px;
+}
+@media (max-width: 760px) {
+  .home-news {
+    margin-top: 56px;
+  }
+  .home-news .news-card:nth-child(n + 2) {
+    display: none;
+  }
+  .news-list li {
+    font-size: 14px;
+  }
 }

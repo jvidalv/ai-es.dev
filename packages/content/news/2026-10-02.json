@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-02",
+  "items": [
+    {
+      "subject": "Claude Code",
+      "fact": "admite mods: extensiones en TypeScript que se instalan como plugins",
+      "url": "https://x.com/ClaudeDevs/status/2105721434807083061"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "integra GLM 5.3; la versión Max lidera CursorBench entre los modelos abiertos",
+      "url": "https://x.com/cursor_ai/status/2105787358557999585"
+    },
+    {
+      "subject": "GitHub Copilot",
+      "fact": "ya controla apps de escritorio, de momento en vista previa",
+      "url": "https://x.com/pierceboggan/status/2105740520828043738"
+    },
+    {
+      "subject": "Grok 4.7",
+      "fact": "llega a Gemini Enterprise Agent Platform",
+      "url": "https://x.com/SpaceXAI/status/2105744399179383124"
+    }
+  ]
+}

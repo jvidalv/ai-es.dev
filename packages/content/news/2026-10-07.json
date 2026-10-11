@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-07",
+  "items": [
+    {
+      "subject": "Mistral Large 4",
+      "fact": "lanza un modelo nativo multimodal de 1T parámetros y 49B activos; API hoy, pesos abiertos en octubre",
+      "url": "https://x.com/MistralAI/status/2107457414387622310"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "permite controlar desde iOS los agentes que corren en el ordenador",
+      "url": "https://x.com/cursor_ai/status/2107618653701296162"
+    },
+    {
+      "subject": "EmbeddingGemma 2",
+      "fact": "lanza embeddings nativos multimodales de 740M parámetros (código, imagen, audio y vídeo), Apache 2.0",
+      "url": "https://x.com/GoogleDeepMind/status/2107502286758895878"
+    },
+    {
+      "subject": "Claude",
+      "fact": "integra un panel en Docs, Sheets y Slides que lee y edita el archivo abierto",
+      "url": "https://x.com/claudeai/status/2107522596845822135"
+    }
+  ]
+}

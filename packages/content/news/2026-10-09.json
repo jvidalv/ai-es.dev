@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-09",
+  "items": [
+    {
+      "subject": "GPT-6.1 Sol",
+      "fact": "lanza Ultrafast en API, Codex y ChatGPT Work, hasta 8 veces más rápido que Sol Standard",
+      "url": "https://x.com/OpenAIDevs/status/2108262812489531498"
+    },
+    {
+      "subject": "Gemini agent",
+      "fact": "llega a Google Cloud: escribe y ejecuta código las 24 horas",
+      "url": "https://x.com/googlecloud/status/2108252402075734172"
+    },
+    {
+      "subject": "Unreal Engine",
+      "fact": "abre MCP oficial para conectar agentes LLM al editor y a UEFN",
+      "url": "https://x.com/UnrealEngine/status/2108226509521785277"
+    },
+    {
+      "subject": "OSS Scanner",
+      "fact": "escanea proyectos open source inscritos y entrega prueba de concepto y parche, sin coste",
+      "url": "https://x.com/AnthropicAI/status/2108302543977906649"
+    }
+  ]
+}

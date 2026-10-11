@@ -48,6 +48,22 @@ export function dateLabel(date: string) {
   return dateFormatter.format(new Date(`${date}T12:00:00Z`));
 }
 
+const dayFormatter = new Intl.DateTimeFormat("es", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+});
+export function dayLabel(date: string) {
+  const label = dayFormatter.format(new Date(`${date}T12:00:00Z`));
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+// A fact cut short by the bot already ends in an ellipsis, so it must not gain a period.
+export function newsSentence(fact: string) {
+  return /[.!?…]$/.test(fact) ? fact : `${fact}.`;
+}
+
 export const routes = {
   home: {
     path: "/",
@@ -60,6 +76,13 @@ export const routes = {
     label: "Blog",
     title: "Blog de IA y desarrollo en español · ai-es",
     description: "Apuntes y guías sobre desarrollo de software y videojuegos con IA.",
+  },
+  news: {
+    path: "/noticias/",
+    label: "Noticias",
+    title: "Noticias de IA · ai-es",
+    description:
+      "Resumen diario de noticias de IA para desarrollo de software y videojuegos. Lo prepara un bot a partir de posts en X y cada línea enlaza al original.",
   },
   community: {
     path: "/comunidad/",

@@ -3,9 +3,19 @@ import { ArrowUpRight, ArrowRight, Menu, X, Moon, Sun, ChevronRight, Rss } from 
 import { SocialIcon } from "./components/social-icon";
 import { BotFx, GameFx, MonitorFx } from "./components/sticker-fx";
 import { YoutubeEmbed } from "./components/youtube-embed";
-import { posts } from "./generated/content";
-import { site, topics, postPath, dateLabel, routes, topicPath, isTopic } from "./lib/site";
-import type { Post, Topic } from "@ai-es/content/types";
+import { news, posts } from "./generated/content";
+import {
+  site,
+  topics,
+  postPath,
+  dateLabel,
+  dayLabel,
+  newsSentence,
+  routes,
+  topicPath,
+  isTopic,
+} from "./lib/site";
+import type { NewsDay, Post, Topic } from "@ai-es/content/types";
 
 function Illustration({ icon, className = "" }: { icon: Post["icon"]; className?: string }) {
   return (
@@ -165,8 +175,81 @@ function PostCard({ post, featured = false }: { post: Post; featured?: boolean }
     </a>
   );
 }
+const weekdayArt = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+function NewsCard({
+  day,
+  heading: Heading,
+  featured = false,
+}: {
+  day: NewsDay;
+  heading: "h2" | "h3";
+  featured?: boolean;
+}) {
+  const date = new Date(day.date);
+  // Days since the epoch, so consecutive days never repeat a color across a month change.
+  const tone = (date.getTime() / 86_400_000) % 3;
+  return (
+    <article className={`post-card news-card tone-${tone}${featured ? " featured-card" : ""}`}>
+      <div className="card-art" aria-hidden="true">
+        <div className="art-orbit" />
+        <span className="art-star">✦</span>
+        <img
+          src={`/images/ai-es-news-${weekdayArt[date.getUTCDay()] ?? "mon"}.svg`}
+          width="256"
+          height="256"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className="card-body">
+        <Heading>
+          <time dateTime={day.date}>{dayLabel(day.date)}</time>
+        </Heading>
+        <ul className="news-list">
+          {day.items.map((item) => (
+            <li key={item.url}>
+              <a href={item.url} target="_blank" rel="noreferrer">
+                {item.subject}
+              </a>{" "}
+              {newsSentence(item.fact)}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+function News() {
+  return (
+    <>
+      <section className="page-intro container">
+        <a className="breadcrumb" href="/">
+          Inicio <ChevronRight size={14} />
+        </a>
+        <h1>Noticias de IA.</h1>
+        <p>{routes.news.description}</p>
+      </section>
+      <section className="container">
+        <div className="listing-grid">
+          {news.map((day) => (
+            <NewsCard key={day.date} day={day} heading="h2" />
+          ))}
+        </div>
+        {news.length === 0 && (
+          <div className="empty-state">
+            <Illustration icon="06" />
+            <h2>Todavía no hay ningún resumen.</h2>
+          </div>
+        )}
+      </section>
+      <JoinCommunity />
+    </>
+  );
+}
 function Home() {
   const articles = posts;
+  const latestNews = news.slice(0, 3);
   const featured = articles.find((post) => post.featured) ?? articles[0];
   return (
     <>
@@ -233,6 +316,24 @@ function Home() {
             ))}
         </div>
       </section>
+      {latestNews.length > 0 && (
+        <section className="section container home-news">
+          <div className="section-heading">
+            <div>
+              <h2>Noticias de IA.</h2>
+            </div>
+            <a className="text-link" href={routes.news.path}>
+              Días anteriores <ArrowRight size={18} />
+            </a>
+          </div>
+          <div className="home-post-grid">
+            {latestNews.map((day, index) => (
+              <NewsCard key={day.date} day={day} heading="h3" featured={index === 0} />
+            ))}
+          </div>
+          <p className="news-source">Resumen automático a partir de posts en X.</p>
+        </section>
+      )}
       <section className="topic-section container">
         <div className="section-heading">
           <div>
@@ -444,6 +545,7 @@ export function App({ path }: { path: string }) {
   let page;
   if (normalized === routes.home.path) page = <Home />;
   else if (normalized === routes.blog.path) page = <Listing />;
+  else if (normalized === routes.news.path) page = <News />;
   else if (normalized === routes.community.path) page = <Community />;
   else if (post) page = <Article post={post} />;
   else if (isTopic(topic)) page = <Listing topic={topic} />;

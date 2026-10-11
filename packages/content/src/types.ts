@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { postMetadata, topicSchema } from "./content-schema.ts";
+import type { newsDay, postMetadata, topicSchema } from "./content-schema.ts";
 
 export type Topic = z.infer<typeof topicSchema>;
 export type Post = Omit<z.infer<typeof postMetadata>, "draft"> & {
@@ -8,6 +8,8 @@ export type Post = Omit<z.infer<typeof postMetadata>, "draft"> & {
   markdown: string;
   minutes: number;
 };
+
+export type NewsDay = z.infer<typeof newsDay>;
 
 export type ContentBlock =
   | { type: "html"; html: string }

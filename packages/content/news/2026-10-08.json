@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-08",
+  "items": [
+    {
+      "subject": "Claude Haiku 5.5",
+      "fact": "sale un 75% más barato que Haiku 4.5 y ya está en AWS, Google Cloud y Azure",
+      "url": "https://x.com/claudeai/status/2107894039626277339"
+    },
+    {
+      "subject": "GPT-6",
+      "fact": "llega a ChatGPT con Intelligent UI; Codex y Work no cambian",
+      "url": "https://x.com/OpenAI/status/2107894997538525580"
+    },
+    {
+      "subject": "Open d1",
+      "fact": "publica d1-3B y d1-omni-600M con pesos abiertos y llama.cpp desde el primer día",
+      "url": "https://x.com/liquidai/status/2107878924831379676"
+    },
+    {
+      "subject": "GitHub Copilot",
+      "fact": "abre en disponibilidad general el sandboxing local de comandos en CLI, app y VS Code",
+      "url": "https://x.com/github/status/2107915368358404147"
+    }
+  ]
+}

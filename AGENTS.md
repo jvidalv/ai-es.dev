@@ -92,6 +92,7 @@ These commands map to their corresponding tools. For example, `vp dev --port 300
 - Keep comments to one or two lines, only for non-obvious reasons or invariants. Tests must catch a named regression rather than pinning authored text or counts.
 - Reuse the `apps/web/src/lib/social-art.ts` Canvas painter registry for social icons. Match the supplied illustrations' flat palette and thick outlines. Respect reduced motion for animation.
 - Content lives in `packages/content/posts`; every published page must be pre-rendered. Drafts and future posts must never enter HTML, RSS, sitemap, Markdown exports or LLM feeds. A future post needs a new build on or after its date.
+- Daily AI news lives in `packages/content/news`, one JSON file per day pushed to main by the Discord news bot. Do not author those summaries by hand; the future-date rule applies to them too.
 - Keep public URLs and community links in `apps/web/src/lib/site.ts`. Do not invent activity, member counts, endorsements, news or affiliations.
 - Preserve native text selection, image controls and browser menus. This is a reading site, not Berrus's game surface.
 - Keep technical publishing and deployment instructions in README. Keep editorial voice in `docs/writing-style.md`; update them alongside behavior changes.
