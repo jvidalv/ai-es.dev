@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./loader": "./src/loader.ts",
+    "./news": "./src/news.ts",
     "./types": "./src/types.ts"
   },
   "scripts": {

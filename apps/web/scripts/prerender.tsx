@@ -3,8 +3,8 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { renderToString } from "react-dom/server";
 import { App } from "../src/app.tsx";
-import { posts } from "../src/generated/content.ts";
-import { site, topics, postPath, routes, topicPath } from "../src/lib/site.ts";
+import { news, posts } from "../src/generated/content.ts";
+import { newsSentence, site, topics, postPath, routes, topicPath } from "../src/lib/site.ts";
 
 const escape = (text: string) =>
   text.replace(
@@ -128,7 +128,9 @@ for (const page of [
     );
     const content = post
       ? post.markdown
-      : `${page.description}\n\n## Comunidad\n\n- [Discord](${site.discord})\n- [Reddit](${site.reddit})\n\n## Publicaciones\n\n${selectedPosts.map((entry) => `- [${entry.title}](${site.origin}${postPath(entry)}index.md): ${entry.description}`).join("\n")}`;
+      : page.path === routes.news.path
+        ? `${page.description}\n\n${news.map((day) => `## ${day.date}\n\n${day.items.map((item) => `- [${item.subject}](${item.url}) ${newsSentence(item.fact)}`).join("\n")}`).join("\n\n")}`
+        : `${page.description}\n\n## Comunidad\n\n- [Discord](${site.discord})\n- [Reddit](${site.reddit})\n\n${isHome ? `## Noticias de IA\n\n- [${routes.news.title}](${site.origin}${routes.news.path}index.md): ${routes.news.description}\n\n` : ""}## Publicaciones\n\n${selectedPosts.map((entry) => `- [${entry.title}](${site.origin}${postPath(entry)}index.md): ${entry.description}`).join("\n")}`;
     const markdown = `# ${post?.title ?? page.title}\n\nFuente: ${url}\nIdioma: español\n${post ? `Autor: ${post.author}\nPublicado: ${post.date}\n` : ""}\n${content}\n`;
     await writeFile(join(dirname(file), "index.md"), markdown);
     markdownPages.push({

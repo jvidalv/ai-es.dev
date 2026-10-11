@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-03",
+  "items": [
+    {
+      "subject": "DeepSeek Harness",
+      "fact": "publica apps de escritorio para macOS y Windows; en Linux se instala con npm",
+      "url": "https://x.com/deepseek_ai/status/2105915715241062644"
+    },
+    {
+      "subject": "GitHub Copilot",
+      "fact": "abre HydraFusion, orquestación de varios modelos, en la app y en VS Code",
+      "url": "https://x.com/github/status/2106062293499068721"
+    },
+    {
+      "subject": "Hugging Face",
+      "fact": "publica un proxy para entrenar agentes en Claude Code, Codex y OpenCode sin tocar el harness",
+      "url": "https://x.com/huggingface/status/2106034221005312448"
+    },
+    {
+      "subject": "Jev",
+      "fact": "llega al AI SDK de Python y se instala con uv add ai",
+      "url": "https://x.com/vercel/status/2106139101422567748"
+    }
+  ]
+}
