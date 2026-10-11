@@ -11,6 +11,19 @@
         "vite-plus": "1.0.0",
       },
     },
+    "apps/news": {
+      "name": "@ai-es/news",
+      "version": "0.0.0",
+      "dependencies": {
+        "@ai-es/content": "workspace:*",
+        "zod": "^4.0.0",
+      },
+      "devDependencies": {
+        "@types/node": "^24.13.3",
+        "typescript": "~6.0.2",
+        "vite-plus": "1.0.0",
+      },
+    },
     "apps/web": {
       "name": "@ai-es/web",
       "version": "0.0.0",
@@ -56,6 +69,8 @@
   },
   "packages": {
     "@ai-es/content": ["@ai-es/content@workspace:packages/content"],
+
+    "@ai-es/news": ["@ai-es/news@workspace:apps/news"],
 
     "@ai-es/web": ["@ai-es/web@workspace:apps/web"],
 

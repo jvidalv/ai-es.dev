@@ -22,10 +22,10 @@ La presentación preferida es «Desarrollo de software y videojuegos con IA». D
 
 ## Cómo trabajamos en el repositorio
 
-- Monorepo con Bun: web en `apps/web`, publicaciones y lector Markdown en `packages/content`, comprobaciones comunes en `scripts`.
+- Monorepo con Bun: web en `apps/web`, generador de noticias y consumidor de Discord en `apps/news`, publicaciones y lector Markdown en `packages/content`, comprobaciones comunes en `scripts`.
 - Nombres de archivos en kebab-case: `app.tsx`, nunca `App.tsx` ni `AppComponent.tsx`.
 - Publicamos artículos desde Markdown en GitHub. Admiten imágenes y vídeos de YouTube; no hay una sección de vídeos independiente.
-- El resumen diario de noticias de IA es un JSON por día en `packages/content/news`. Lo sube un bot a `main` después de publicarlo en Discord; no lo escribimos a mano.
+- El resumen diario de noticias de IA es un JSON por día en `packages/content/news`. Lo genera `apps/news` y lo sube a `main`; la web y Discord leen ese mismo registro por separado. No lo escribimos a mano.
 - Mantener HTML pre-renderizado, metadatos, RSS, sitemap y fuentes Markdown para LLMs. La imagen social se genera durante el build.
 - Railway despliega automáticamente los cambios de `main`. Su contexto Docker debe seguir en la raíz del monorepo.
 - Seguir las reglas de Git y la revisión `/code-review high --fix` → `/post-work-review` de AGENTS.md. Preservar cambios ajenos.

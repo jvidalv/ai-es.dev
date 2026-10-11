@@ -20,6 +20,8 @@
     "preview": "bun run --filter @ai-es/web preview",
     "start": "bun run --filter @ai-es/web start",
     "content": "bun run --filter @ai-es/web content",
+    "news:generate": "bun run --filter @ai-es/news generate",
+    "news:discord": "bun run --filter @ai-es/news discord",
     "verify:build": "bun run --filter @ai-es/web verify:build",
     "check": "bun run content && vp check",
     "test": "vp test run",

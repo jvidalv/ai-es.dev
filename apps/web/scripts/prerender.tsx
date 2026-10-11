@@ -1,10 +1,11 @@
 import { createElement } from "react";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { newsSentence } from "@ai-es/content/news-text";
 import { renderToString } from "react-dom/server";
 import { App } from "../src/app.tsx";
 import { news, posts } from "../src/generated/content.ts";
-import { newsSentence, site, topics, postPath, routes, topicPath } from "../src/lib/site.ts";
+import { site, topics, postPath, routes, topicPath } from "../src/lib/site.ts";
 
 const escape = (text: string) =>
   text.replace(

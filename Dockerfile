@@ -4,6 +4,7 @@ COPY --from=bun /usr/local/bin/bun /usr/local/bin/bun
 WORKDIR /app
 COPY package.json bun.lock ./
 COPY apps/web/package.json ./apps/web/package.json
+COPY apps/news/package.json ./apps/news/package.json
 COPY packages/content/package.json ./packages/content/package.json
 RUN bun install --frozen-lockfile
 COPY . .

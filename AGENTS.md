@@ -79,7 +79,8 @@ These commands map to their corresponding tools. For example, `vp dev --port 300
 ## Workspace layout
 
 - `apps/web` owns the React app, static server and website build scripts.
-- `packages/content` owns Markdown posts, publication validation and shared content types. Import its explicit package exports; do not reach into sibling workspaces with relative paths.
+- `apps/news` owns the daily news generator and the Discord consumer. It never renders the website and the website never calls it.
+- `packages/content` owns Markdown posts, daily news records, publication validation and shared content types. Import its explicit package exports; do not reach into sibling workspaces with relative paths.
 - Root scripts enforce rules across all workspaces. Keep one Bun lockfile and the Railway Docker build context at the root.
 
 ## ai-es rules
@@ -92,7 +93,7 @@ These commands map to their corresponding tools. For example, `vp dev --port 300
 - Keep comments to one or two lines, only for non-obvious reasons or invariants. Tests must catch a named regression rather than pinning authored text or counts.
 - Reuse the `apps/web/src/lib/social-art.ts` Canvas painter registry for social icons. Match the supplied illustrations' flat palette and thick outlines. Respect reduced motion for animation.
 - Content lives in `packages/content/posts`; every published page must be pre-rendered. Drafts and future posts must never enter HTML, RSS, sitemap, Markdown exports or LLM feeds. A future post needs a new build on or after its date.
-- Daily AI news lives in `packages/content/news`, one JSON file per day pushed to main by the Discord news bot. Do not author those summaries by hand; the future-date rule applies to them too.
+- Daily AI news lives in `packages/content/news`, one JSON record per day committed to main by the generator in `apps/news`. Main is the only source: every consumer (website build, Discord) reads the record from main and must not depend on another consumer or on the generator's process. Validate records with `parseNewsDay` on both sides; do not copy its rules. Do not author summaries by hand; the future-date rule applies to them too.
 - Keep public URLs and community links in `apps/web/src/lib/site.ts`. Do not invent activity, member counts, endorsements, news or affiliations.
 - Preserve native text selection, image controls and browser menus. This is a reading site, not Berrus's game surface.
 - Keep technical publishing and deployment instructions in README. Keep editorial voice in `docs/writing-style.md`; update them alongside behavior changes.

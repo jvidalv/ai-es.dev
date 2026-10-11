@@ -26,6 +26,7 @@ Bun 1.4.2 gestiona los workspaces, las dependencias y el servidor de producción
 
 - `apps/web`: web, servidor, imágenes y generación de HTML y metadatos.
 - `packages/content`: publicaciones Markdown, resúmenes diarios de noticias, validación, tipos y lector de contenido. La web lo usa como `@ai-es/content` mediante `workspace:*`.
+- `apps/news`: generador del resumen diario de noticias de IA y consumidor que lo publica en Discord.
 - `scripts`: comprobaciones del repositorio. Un solo `bun.lock` fija las dependencias.
 
 Ejecutar los comandos desde la raíz:
@@ -81,7 +82,18 @@ También hay listas, enlaces, citas y bloques de código.
 
 ## Resumen diario de noticias de IA
 
-La portada y `/noticias/` muestran el resumen de noticias de IA que se publica en el canal de noticias de Discord. Cada día es un archivo `packages/content/news/AAAA-MM-DD.json`:
+Un generador escribe cada día un registro, `packages/content/news/AAAA-MM-DD.json`, y lo sube a `main`. Ese commit es la única fuente: la web y Discord lo leen por separado y ninguno depende del otro.
+
+```text
+generador (apps/news)      Grok busca en X, se verifica cada post y se valida el registro
+        |                  commit de packages/content/news/AAAA-MM-DD.json
+        v
+      main
+        |-- web: Railway reconstruye el sitio con el push
+        '-- Discord: .github/workflows/news-discord.yml publica el resumen del día
+```
+
+El registro tiene esta forma:
 
 ```json
 {
@@ -96,13 +108,30 @@ La portada y `/noticias/` muestran el resumen de noticias de IA que se publica e
 }
 ```
 
-- Un bot sube el archivo a `main` después de publicar el resumen en Discord, así que Railway despliega la web una vez al día. No escribir estos resúmenes a mano. Sí se puede corregir o borrar una línea equivocada.
+- No escribir estos resúmenes a mano. Sí se puede corregir o borrar una línea equivocada: la web se actualiza con el commit y Discord no vuelve a publicar un día que ya está en el canal.
 - `subject` admite 40 caracteres y `fact` 120, en una sola línea y sin corchetes ni barras invertidas. La web añade el punto final si falta. `url` debe ser un post de `x.com` y no puede repetirse en el mismo día. El nombre del archivo debe coincidir con `date`. Un archivo inválido bloquea el build.
 - La portada muestra los 3 últimos días y `/noticias/` los 30 más recientes. Los archivos anteriores se quedan en el repositorio.
 - Cada día admite de 1 a 8 noticias.
 - La ilustración de cada tarjeta depende del día de la semana: `apps/web/public/images/ai-es-news-{mon,tue,wed,thu,fri,sat,sun}.svg`, dibujadas con la paleta de `apps/web/src/lib/social-art.ts`.
 - Un día con fecha futura no se publica, igual que los artículos. La fecha se compara con el día UTC.
 - El resumen no entra en el RSS, que sigue siendo solo de publicaciones. Sí tiene su `index.md` y aparece en el sitemap y en `llms.txt`.
+
+### Generador
+
+`bun run news:generate` necesita la CLI `grok` con sesión iniciada, así que se ejecuta en el servidor que la tiene, desde un checkout de `main` con permiso de push. Hace `git pull`, no genera nada si el registro del día ya existe, descarta los posts que no puede verificar o que ya salieron en los últimos 14 días, valida el registro con el mismo lector que usa el build y hace commit y push. Si no queda ninguna noticia, ese día no hay registro. `--dry-run` muestra el registro sin escribirlo.
+
+```cron
+0 9 * * * root cd /opt/ai-es.dev && flock -n /run/ai-es-news.lock timeout 1500 bun --env-file=/opt/ai-es-news/news.env run news:generate >>/var/log/ai-es-news.log 2>&1
+```
+
+### Consumidor de Discord
+
+`bun run news:discord` lee de `origin/main` el registro de hoy, o el de la fecha que reciba como argumento, y publica el embed. Antes mira los últimos mensajes del canal: si el primer enlace del día ya está, no publica. Por eso se puede lanzar varias veces y desde varios sitios sin duplicar.
+
+- En GitHub Actions lo lanza `news-discord.yml` con cada push a `main` que toca `packages/content/news/`. Necesita el secreto `NEWS_DISCORD_TOKEN` y las variables `NEWS_CHANNEL_ID` y `NEWS_ALERT_USER_ID`. Sin el secreto, el workflow termina con un aviso y no publica.
+- Mientras el repositorio no tenga ese secreto, el servidor del generador lanza el mismo comando después de generar.
+
+Las variables están en [`apps/news/.env.example`](apps/news/.env.example). Si el generador o el consumidor fallan, avisan por mensaje directo a `NEWS_ALERT_USER_ID`.
 
 ## Imágenes
 
