@@ -167,20 +167,12 @@ function PostCard({ post, featured = false }: { post: Post; featured?: boolean }
   );
 }
 const weekdayArt = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-function NewsCard({
-  day,
-  heading: Heading,
-  featured = false,
-}: {
-  day: NewsDay;
-  heading: "h2" | "h3";
-  featured?: boolean;
-}) {
+function NewsCard({ day, heading: Heading }: { day: NewsDay; heading: "h2" | "h3" }) {
   const date = new Date(day.date);
   // Days since the epoch, so consecutive days never repeat a color across a month change.
   const tone = (date.getTime() / 86_400_000) % 3;
   return (
-    <article className={`post-card news-card tone-${tone}${featured ? " featured-card" : ""}`}>
+    <article className={`post-card news-card tone-${tone}`}>
       <div className="card-art" aria-hidden="true">
         <div className="art-orbit" />
         <span className="art-star">✦</span>
@@ -222,7 +214,7 @@ function News() {
         <p>{routes.news.description}</p>
       </section>
       <section className="container">
-        <div className="listing-grid">
+        <div className="news-rows">
           {news.map((day) => (
             <NewsCard key={day.date} day={day} heading="h2" />
           ))}
@@ -317,9 +309,9 @@ function Home() {
               Días anteriores <ArrowRight size={18} />
             </a>
           </div>
-          <div className="home-post-grid">
-            {latestNews.map((day, index) => (
-              <NewsCard key={day.date} day={day} heading="h3" featured={index === 0} />
+          <div className="news-rows">
+            {latestNews.map((day) => (
+              <NewsCard key={day.date} day={day} heading="h3" />
             ))}
           </div>
           <p className="news-source">Resumen automático a partir de posts en X.</p>
