@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-12",
+  "items": [
+    {
+      "subject": "GitHub",
+      "fact": "lanza Fuzzing Taskflow: agente que crea harnesses, ejecuta AFL++ y reporta bugs en C y C++",
+      "url": "https://x.com/github/status/2109364666237350135"
+    },
+    {
+      "subject": "Hugging Face",
+      "fact": "convierte problemas de matemáticas de OpenAI en entornos de RL open source",
+      "url": "https://x.com/ClementDelangue/status/2109290775322243143"
+    }
+  ]
+}
