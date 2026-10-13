@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-13",
+  "items": [
+    {
+      "subject": "Cursor",
+      "fact": "pasa a The X Subscription; modelos de terceros a precio de API y el doble de uso en Grok",
+      "url": "https://x.com/cursor_ai/status/2109783879490191502"
+    },
+    {
+      "subject": "Muse Wonder",
+      "fact": "llega a la Meta Model API y a Muse Code; Full, para suscriptores",
+      "url": "https://x.com/AIatMeta/status/2109691148943999167"
+    },
+    {
+      "subject": "Anthropic",
+      "fact": "publica defensas que recortan los ataques de destilación contra Claude",
+      "url": "https://x.com/AnthropicAI/status/2109795898909950247"
+    }
+  ]
+}
