@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-14",
+  "items": [
+    {
+      "subject": "Gemini 4 Argon",
+      "fact": "sale a nivel mundial en la API de pago y, con Ultra, en Antigravity y AI Studio",
+      "url": "https://x.com/GoogleDeepMind/status/2110039274922131792"
+    },
+    {
+      "subject": "Cursor Origin",
+      "fact": "añade más de 20 integraciones y abre el marketplace a envíos públicos",
+      "url": "https://x.com/cursor_ai/status/2110075611633074295"
+    },
+    {
+      "subject": "Anthropic",
+      "fact": "migra su monorepo de git a un control de versiones propio; de 2.500 a 30.000 cambios al día",
+      "url": "https://x.com/AnthropicAI/status/2110047081414987957"
+    }
+  ]
+}
