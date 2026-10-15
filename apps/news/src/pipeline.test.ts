@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import { isSent, renderEmbed } from "./embed.ts";
-import { extractCandidates, grokArgs } from "./grok.ts";
+import { extractCandidates, grokArgs, grokCommand } from "./grok.ts";
 import { buildRecord } from "./record.ts";
 
 const post = (id: string, extra: Record<string, string> = {}) => ({
@@ -68,6 +68,13 @@ describe("grok", () => {
     );
     // With x_search in --tools, grok keeps every local tool.
     expect(args).not.toContain("--tools");
+  });
+  it("never runs grok as root, where it could read the generator's secrets", () => {
+    const { command, args } = grokCommand({ prompt: "prompt", asRoot: true });
+    expect(command).toBe("systemd-run");
+    expect(args).toEqual(
+      expect.arrayContaining(["User=ai-es-grok", "ProtectHome=yes", "--expand-environment=no"]),
+    );
   });
 });
 

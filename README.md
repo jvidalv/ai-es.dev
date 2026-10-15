@@ -124,6 +124,23 @@ El registro tiene esta forma:
 0 9 * * * root cd /opt/ai-es.dev && flock -n /run/ai-es-news.lock sh -c 'git pull -q --ff-only && bun install --frozen-lockfile >/dev/null && timeout 1500 bun --env-file=/opt/ai-es-news/news.env run news:generate' >>/var/log/ai-es-news.log 2>&1
 ```
 
+Esa lista no cubre las herramientas que traiga una versión nueva de `grok`. Por eso, cuando el generador corre como root, lanza `grok` con `systemd-run` como el usuario sin privilegios `ai-es-grok` y dentro de un sandbox (ver `grokCommand` en `apps/news/src/grok.ts`). Solo puede escribir en su home `/var/lib/ai-es-grok`. No ve `/root`, `/home`, `/opt` ni `/srv`, y no llega a servicios de la máquina ni de la red privada, salvo al DNS. Así no lee `news.env`, los tokens de `gh` ni la sesión de `grok` de root. Ese usuario tiene su propio `grok` en `~/.grok/bin/grok` y su propia sesión. Si faltan el usuario o el binario, el generador falla en vez de ejecutar `grok` como root.
+
+Preparar el usuario en un servidor nuevo, copiando el binario de una instalación de `grok` que ya exista:
+
+```bash
+useradd --system --home-dir /var/lib/ai-es-grok --create-home --shell /usr/sbin/nologin --user-group ai-es-grok
+install -d -o ai-es-grok -g ai-es-grok -m 700 /var/lib/ai-es-grok/.grok/downloads /var/lib/ai-es-grok/.grok/bin
+install -o ai-es-grok -g ai-es-grok -m 755 /root/.grok/downloads/grok-<versión>-linux-x86_64 /var/lib/ai-es-grok/.grok/downloads/
+ln -sfn ../downloads/grok-<versión>-linux-x86_64 /var/lib/ai-es-grok/.grok/bin/grok
+```
+
+Iniciar o renovar la sesión de ese usuario (pide aprobar un código en el navegador):
+
+```bash
+systemd-run --pipe --wait --collect --quiet -p User=ai-es-grok -p WorkingDirectory=/var/lib/ai-es-grok /var/lib/ai-es-grok/.grok/bin/grok login --device-auth
+```
+
 ### Consumidor de Discord
 
 `bun run news:discord` lee de `origin/main` los registros de los 3 últimos días y publica los que falten en el canal, del más antiguo al más reciente. Para saber si un día falta lee los mensajes del canal hasta el primer día de esa ventana, justo antes de publicar: si alguno de los enlaces del día ya está, no lo publica. Por eso se puede reintentar sin duplicar, y un registro que llega uno o dos días tarde a `main` también se entrega.
