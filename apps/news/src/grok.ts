@@ -6,8 +6,39 @@ import { promisify } from "node:util";
 import { z } from "zod";
 
 const run = promisify(execFile);
-// The cron job gives the whole run 1500 s; normal searches take between 450 and 900 s.
+// The cron job gives the whole run 1500 s; a normal search takes 200 to 300 s.
 const timeoutSeconds = 1320;
+// Grok reads untrusted posts as root: it keeps X search (a server tool) and todo_write, nothing else.
+// An allowlist cannot do this: with x_search in --tools, grok 1.0.46 keeps all local tools.
+const deniedTools = [
+  "run_terminal_command",
+  "run_terminal_cmd",
+  "read_file",
+  "write",
+  "search_replace",
+  "list_dir",
+  "grep",
+  "web_fetch",
+  "workflow",
+  "monitor",
+  "image_edit",
+  "image_gen",
+  "image_to_video",
+  "reference_to_video",
+  "spawn_subagent",
+  "Agent",
+  "scheduler_create",
+  "scheduler_delete",
+  "scheduler_list",
+  "get_command_or_subagent_output",
+  "kill_command_or_subagent",
+  "send_feedback",
+  "ask_user_question",
+  "enter_plan_mode",
+  "exit_plan_mode",
+  "search_tool",
+  "use_tool",
+];
 const output = z.object({ text: z.string(), total_cost_usd: z.number().optional() });
 const answer = z.object({ items: z.array(z.unknown()) });
 const candidate = z.object({ subject: z.string(), fact: z.string(), url: z.string() });
@@ -59,6 +90,10 @@ export function extractCandidates(text: string): Candidate[] | null {
   return found;
 }
 
+export function grokArgs(prompt: string) {
+  return ["-p", prompt, "--output-format", "json", "--disallowed-tools", deniedTools.join(",")];
+}
+
 export async function runGrok({ today, maxItems }: { today: string; maxItems: number }) {
   const template = await readFile(new URL("../prompt.md", import.meta.url), "utf8");
   const prompt = template.replaceAll("{{TODAY}}", today).replaceAll("{{MAX}}", String(maxItems));
@@ -67,9 +102,9 @@ export async function runGrok({ today, maxItems }: { today: string; maxItems: nu
   await mkdir(cwd, { recursive: true });
   let stdout: string;
   try {
-    ({ stdout } = await run("grok", ["-p", prompt, "--output-format", "json"], {
+    ({ stdout } = await run("grok", grokArgs(prompt), {
       cwd,
-      // Grok reads untrusted posts and can run commands: it gets no secret from this process.
+      // Grok gets no secret from this process, only PATH and HOME.
       env: { PATH: process.env.PATH, HOME: process.env.HOME },
       timeout: timeoutSeconds * 1000,
       maxBuffer: 64 * 1024 * 1024,

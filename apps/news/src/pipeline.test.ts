@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import { isSent, renderEmbed } from "./embed.ts";
-import { extractCandidates } from "./grok.ts";
+import { extractCandidates, grokArgs } from "./grok.ts";
 import { buildRecord } from "./record.ts";
 
 const post = (id: string, extra: Record<string, string> = {}) => ({
@@ -56,6 +56,18 @@ describe("generator", () => {
     });
     expect(source).not.toContain("/status/1");
     expect(source).toContain(`"fact": "${"a".repeat(118)}…"`);
+  });
+});
+
+describe("grok", () => {
+  it("removes the local tools that could run commands or read secrets", () => {
+    const args = grokArgs("prompt");
+    const denied = args[args.indexOf("--disallowed-tools") + 1]?.split(",") ?? [];
+    expect(denied).toEqual(
+      expect.arrayContaining(["run_terminal_command", "read_file", "write", "search_replace"]),
+    );
+    // With x_search in --tools, grok keeps every local tool.
+    expect(args).not.toContain("--tools");
   });
 });
 
