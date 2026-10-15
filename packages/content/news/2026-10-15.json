@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-15",
+  "items": [
+    {
+      "subject": "Codex",
+      "fact": "retira GPT-5.5 en sesiones con ChatGPT; la API no cambia y el reemplazo es gpt-6.1-sol",
+      "url": "https://x.com/CodexReleases/status/2110448511234023904"
+    },
+    {
+      "subject": "Claude Code",
+      "fact": "publica la versión 2.1.300: 88 cambios en la CLI y uno en el prompt del sistema",
+      "url": "https://x.com/ClaudeCodeLog/status/2110440355468296404"
+    },
+    {
+      "subject": "Gemini 4 Argon",
+      "fact": "ofrece a 10.000 científicos 6 meses gratis del nivel máximo en Antigravity",
+      "url": "https://x.com/GoogleDeepMind/status/2110421861435879476"
+    },
+    {
+      "subject": "Muse Wonder",
+      "fact": "lidera con Muse Wonder Full en tareas agénticas personales y profesionales",
+      "url": "https://x.com/AIatMeta/status/2110517571149807685"
+    }
+  ]
+}
