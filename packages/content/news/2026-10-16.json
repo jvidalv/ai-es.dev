@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-16",
+  "items": [
+    {
+      "subject": "Muse Spark Open",
+      "fact": "lanza pesos abiertos de 816B/42B, contexto de 1M y multimodal nativo para código y agentes",
+      "url": "https://x.com/AIatMeta/status/2110779754274292212"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "integra Muse Wonder; marca 46,1% en CursorBench, el máximo de la familia Muse",
+      "url": "https://x.com/cursor_ai/status/2110867556693430293"
+    },
+    {
+      "subject": "Nemotron 3.5 Super VL",
+      "fact": "publica pesos, datos y recetas: 120B/12B con visión y herramientas para agentes",
+      "url": "https://x.com/NVIDIAAI/status/2110749836450713896"
+    },
+    {
+      "subject": "FLUX 3 Image Klein",
+      "fact": "libera pesos abiertos de 5,6B; genera 4K nativo y corre en una GPU de consumo",
+      "url": "https://x.com/bfl_ai/status/2110751201105256925"
+    }
+  ]
+}
