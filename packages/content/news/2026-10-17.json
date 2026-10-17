@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-17",
+  "items": [
+    {
+      "subject": "GPT-6 Astra Pro",
+      "fact": "ejecuta varios agentes en paralelo y mejora plugins y herramientas; ya en ChatGPT Pro",
+      "url": "https://x.com/OpenAI/status/2111192259073094035"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "genera canvases interactivos con agentes en la nube y abre la Environments API en beta",
+      "url": "https://x.com/cursor_ai/status/2111193957527146711"
+    },
+    {
+      "subject": "Beam",
+      "fact": "publica pesos abiertos Apache 2.0 (501B, 23B activos) y el harness Mirror CLI",
+      "url": "https://x.com/reflection_ai/status/2111079965529968798"
+    },
+    {
+      "subject": "Gemini 4 Argon",
+      "fact": "vence Minecraft desde cero con 4 agentes, 2783 programas y 27 horas",
+      "url": "https://x.com/GoogleDeepMind/status/2111127991401247033"
+    }
+  ]
+}
