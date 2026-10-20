@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-20",
+  "items": [
+    {
+      "subject": "MiniMax M3.1 Flash",
+      "fact": "lanza API a 0,15/0,60 $ por 1M tokens; los pesos abiertos llegan el 23 de octubre",
+      "url": "https://x.com/MiniMax_AI/status/2112150867868541221"
+    },
+    {
+      "subject": "Muse Glimmer",
+      "fact": "publica un modelo de 30B de pesos abiertos para agentes en GPU de consumo a 4 bits",
+      "url": "https://x.com/AIatMeta/status/2112265822274302066"
+    },
+    {
+      "subject": "OpenAI",
+      "fact": "mejora la creación y migración de software en COBOL, Fortran y Visual Basic",
+      "url": "https://x.com/OpenAI/status/2112310345863930168"
+    },
+    {
+      "subject": "SKY-001",
+      "fact": "bate a GPT-6 Astra en CAD y BIM y es 51-125 veces más rápido",
+      "url": "https://x.com/spisallyouneed/status/2112242023805964327"
+    }
+  ]
+}
