@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-21",
+  "items": [
+    {
+      "subject": "DeepInfer",
+      "fact": "abre en open source el motor de inferencia de producción de DeepSeek-V4.1-Flash",
+      "url": "https://x.com/deepseek_ai/status/2112476496283775135"
+    },
+    {
+      "subject": "Voxtral 3",
+      "fact": "lanza modelos Transcribe y Speech y una API de agentes de voz con SDK sobre LiveKit",
+      "url": "https://x.com/MistralAI/status/2112574615318876178"
+    },
+    {
+      "subject": "OpenAI API",
+      "fact": "admite prompt caching de 12 horas, combinable con el de 30 minutos en una misma petición",
+      "url": "https://x.com/OpenAIDevs/status/2112603916076781778"
+    },
+    {
+      "subject": "Perplexity Computer",
+      "fact": "ya corre modelo y agente en local en Macs Apple silicon, para Pro, Max y Enterprise",
+      "url": "https://x.com/perplexity_ai/status/2112571597798461920"
+    }
+  ]
+}
