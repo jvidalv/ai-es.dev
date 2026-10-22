@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-22",
+  "items": [
+    {
+      "subject": "Claude Duet",
+      "fact": "abre vista previa de investigación: agente proactivo, lista de espera en Pro y Max de EE. UU",
+      "url": "https://x.com/claudeai/status/2112984664256241837"
+    },
+    {
+      "subject": "OpenAI",
+      "fact": "lleva modelos frontier y flujos agénticos de Codex a Model Garden de Google Cloud",
+      "url": "https://x.com/OpenAI/status/2112988118471295323"
+    },
+    {
+      "subject": "Claude Security",
+      "fact": "reescanea el código al cambiar y marca las correcciones; beta pública en Claude Enterprise",
+      "url": "https://x.com/claudeai/status/2112962248218148878"
+    },
+    {
+      "subject": "PDD Kit",
+      "fact": "prueba con Verus que el código del agente cumple la especificación; funciona hoy en Rust",
+      "url": "https://x.com/GitHubNext/status/2112936525457740139"
+    }
+  ]
+}
