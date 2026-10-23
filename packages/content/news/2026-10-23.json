@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-23",
+  "items": [
+    {
+      "subject": "Agent Skills",
+      "fact": "dona el estándar a la Agentic AI Foundation; lo integran Cursor, Copilot y más de 70 plataformas",
+      "url": "https://x.com/ClaudeDevs/status/2113328526413996100"
+    },
+    {
+      "subject": "MiniMax M3.1 Flash",
+      "fact": "publica los pesos abiertos: 428B de parámetros y 23B activos por token",
+      "url": "https://x.com/MiniMax_AI/status/2113436864904610008"
+    },
+    {
+      "subject": "Claude",
+      "fact": "llega a Google Cloud en disponibilidad general, con IAM y facturación de GCP",
+      "url": "https://x.com/claudeai/status/2113380122468454765"
+    },
+    {
+      "subject": "Decisions API",
+      "fact": "pasa a disponibilidad general; clasifica texto e imagen sin generar una respuesta completa",
+      "url": "https://x.com/OpenAIDevs/status/2113346642787086538"
+    }
+  ]
+}
