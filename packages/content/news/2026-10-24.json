@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-24",
+  "items": [
+    {
+      "subject": "Kimi K3.1 Pro",
+      "fact": "lanza un MoE de 2,8T/104B y 1M de contexto; API ya disponible y pesos el 4 de noviembre",
+      "url": "https://x.com/Kimi_Moonshot/status/2113680701770068067"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "permite a los agentes pulsar y escribir en cualquier app de escritorio, no solo el navegador",
+      "url": "https://x.com/cursor_ai/status/2113661506634305834"
+    },
+    {
+      "subject": "Nemotron 3.5 Bolt",
+      "fact": "lanza un modelo abierto de 4 GB para asistentes, personajes interactivos y robots locales",
+      "url": "https://x.com/NVIDIAAI/status/2113657112408785153"
+    },
+    {
+      "subject": "Hy-Nomas",
+      "fact": "abre un world model de video interactivo por texto y cámara, optimizado para GPUs de consumo",
+      "url": "https://x.com/TencentHunyuan/status/2113676827114053892"
+    }
+  ]
+}
