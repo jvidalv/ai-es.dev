@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-25",
+  "items": [
+    {
+      "subject": "vLLM",
+      "fact": "iguala a DeepInfer en el decode de DeepSeek-V4.1-Flash, en lotes de 8 a 256",
+      "url": "https://x.com/vllm_project/status/2114054277379641770"
+    },
+    {
+      "subject": "Scenario ALTER",
+      "fact": "lanza una skill de Claude para cambiar actor, ropa o localización en vídeo",
+      "url": "https://x.com/Scenario_gg/status/2113998556524646534"
+    }
+  ]
+}
