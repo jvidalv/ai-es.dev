@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-26",
+  "items": [
+    {
+      "subject": "Nanbeige4.3-33B",
+      "fact": "publica pesos abiertos Apache 2.0 de 33B densos con 512K de contexto",
+      "url": "https://x.com/nanbeige/status/2114328933181333798"
+    },
+    {
+      "subject": "Kimi K3.1 Pro",
+      "fact": "restablece el 25% de la cuota mensual a todos los suscriptores, equivalente a una semana",
+      "url": "https://x.com/Kimi_Moonshot/status/2114450610724708492"
+    },
+    {
+      "subject": "GitHub",
+      "fact": "sube un 11,5% la aceptación del clasificador de secretos y recorta un 86% el tiempo medio de escaneo",
+      "url": "https://x.com/github/status/2114479620091171249"
+    }
+  ]
+}
