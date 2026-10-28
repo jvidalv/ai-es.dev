@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-28",
+  "items": [
+    {
+      "subject": "Genie 4",
+      "fact": "lanza un world model interactivo en tiempo real; llega pronto a Google AI Ultra y a la API",
+      "url": "https://x.com/GoogleDeepMind/status/2115114028338962672"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "añade Annotate al design mode: prompts visuales para editar, dibujar y revisar tamaños",
+      "url": "https://x.com/cursor_ai/status/2115159585548021814"
+    },
+    {
+      "subject": "FrontierCode 2.0",
+      "fact": "evalúa si un PR se fusionaría; el modelo líder puntúa un 45% con prompts ambiguos",
+      "url": "https://x.com/cognition/status/2115132488775524793"
+    },
+    {
+      "subject": "Intelligence Index v5",
+      "fact": "publica la v5 con un 60% de datasets privados; Claude Opus 5.5 lidera con 58",
+      "url": "https://x.com/ArtificialAnlys/status/2115265133467635877"
+    }
+  ]
+}
