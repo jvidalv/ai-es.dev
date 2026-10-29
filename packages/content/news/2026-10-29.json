@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-29",
+  "items": [
+    {
+      "subject": "Gemini 4 Carbon",
+      "fact": "llega como modelo frontier SOTA en ciberseguridad y código de largo horizonte",
+      "url": "https://x.com/GoogleDeepMind/status/2115489356437651654"
+    },
+    {
+      "subject": "Copilot Fusion",
+      "fact": "coordina varios modelos; Max queda a 2 puntos de Claude Code Opus 5.5 Max a mitad de coste",
+      "url": "https://x.com/github/status/2115500310865301921"
+    },
+    {
+      "subject": "Responses API",
+      "fact": "entra en vista previa pública y separa respuesta, razonamiento y tool calls",
+      "url": "https://x.com/MistralAI/status/2115443720371814478"
+    }
+  ]
+}
