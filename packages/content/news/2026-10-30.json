@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30",
+  "items": [
+    {
+      "subject": "Mistral Large 4",
+      "fact": "publica pesos abiertos (1T-A52B) y lidera FrontierCode entre modelos abiertos",
+      "url": "https://x.com/MistralAI/status/2115811242556137820"
+    },
+    {
+      "subject": "ChatGPT",
+      "fact": "duplica los límites de uso en Pro 100/200/500 y Business Premium",
+      "url": "https://x.com/thsottiaux/status/2115850175868727621"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "detecta malware en una extensión de Claude Code que afectó como máximo a 5.000 usuarios",
+      "url": "https://x.com/cursor_ai/status/2116074289053175808"
+    }
+  ]
+}
