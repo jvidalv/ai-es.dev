@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-03",
+  "items": [
+    {
+      "subject": "GPT-6 Astra",
+      "fact": "edita el 0,016% de los pesos de Qwen3.5-0.8B y mejora matemáticas hasta 6 veces",
+      "url": "https://x.com/rikiyatakehi/status/2117313742891327994"
+    },
+    {
+      "subject": "OpenAI",
+      "fact": "presenta Pando, un backend Git para monorepos que recorta un 80% la latencia de push",
+      "url": "https://x.com/OpenAIDevs/status/2117408792346509663"
+    }
+  ]
+}
