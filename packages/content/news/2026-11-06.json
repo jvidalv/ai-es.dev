@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-06",
+  "items": [
+    {
+      "subject": "GPT-6 Cyber",
+      "fact": "llega a clientes selectos de Daybreak Red para investigación de seguridad",
+      "url": "https://x.com/OpenAI/status/2118390190246879554"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "despliega apps en vivo con base de datos y un enlace para compartir, en planes de pago",
+      "url": "https://x.com/cursor_ai/status/2118458629091426304"
+    },
+    {
+      "subject": "Gemini Omni 1.2 Flash",
+      "fact": "genera vídeo de 15 s en la API a 0,07 dólares/s en 720p, un 30% más barato",
+      "url": "https://x.com/GoogleAI/status/2118389961426874879"
+    },
+    {
+      "subject": "Devin Review 2.0",
+      "fact": "revisa pull requests hasta 5 veces más barato y 1,5 veces más rápido, con Autofix",
+      "url": "https://x.com/cognition/status/2118390707228745948"
+    }
+  ]
+}
