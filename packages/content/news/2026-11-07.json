@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-07",
+  "items": [
+    {
+      "subject": "GitHub",
+      "fact": "soporta 5.000 agentes concurrentes y 7.200 pushes/s en un repo; vista previa privada",
+      "url": "https://x.com/github/status/2118830274431873379"
+    },
+    {
+      "subject": "Claude",
+      "fact": "usa dreaming para organizar la memoria de sus agentes y corregir errores",
+      "url": "https://x.com/AnthropicAI/status/2118814753154064501"
+    },
+    {
+      "subject": "Muse",
+      "fact": "incorpora Active Memory y Active Focus, con 2,4 veces menos olvido de datos clave",
+      "url": "https://x.com/AIatMeta/status/2118768974779634084"
+    },
+    {
+      "subject": "Google DeepMind",
+      "fact": "halla dos debilidades graves en RSA de 1024 bits con agentes de IA guiados",
+      "url": "https://x.com/GoogleDeepMind/status/2118755418675765656"
+    }
+  ]
+}
