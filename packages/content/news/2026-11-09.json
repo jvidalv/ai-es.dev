@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-09",
+  "items": [
+    {
+      "subject": "GitHub Copilot",
+      "fact": "abre una sesión de Copilot app en VS Code con tarea, plan, conversación y cambios",
+      "url": "https://x.com/github/status/2119529896296722931"
+    },
+    {
+      "subject": "NVIDIA Dynamo",
+      "fact": "publica recetas de despliegue para A.X K2, K-EXAONE 2.0, Solar Open 2 y Motif-3; hasta 2x en B200",
+      "url": "https://x.com/NVIDIAAI/status/2119667551982813584"
+    },
+    {
+      "subject": "Decision Index v2",
+      "fact": "publica la v2; Drex Max 1.1 lidera los modelos de decisión con 73",
+      "url": "https://x.com/ArtificialAnlys/status/2119578471559213411"
+    }
+  ]
+}
