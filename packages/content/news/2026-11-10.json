@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-10",
+  "items": [
+    {
+      "subject": "Claude Fable 5.2",
+      "fact": "sale en planes de pago y nubes a 8 $/M de entrada; genera hasta un 30% más rápido",
+      "url": "https://x.com/claudeai/status/2119867114450268322"
+    },
+    {
+      "subject": "Muse Ember",
+      "fact": "llega a la Meta Model API a 0,10 $/M de entrada, con contexto de 1M de tokens",
+      "url": "https://x.com/AIatMeta/status/2119853591703998787"
+    },
+    {
+      "subject": "Unreal Engine 5.9",
+      "fact": "abre la preview MegaJam con agentes de código en el editor y MCP ampliado",
+      "url": "https://x.com/UnrealEngine/status/2119806791567773829"
+    },
+    {
+      "subject": "dot",
+      "fact": "conecta varios ordenadores locales al mismo agente y elige cuál usa para cada tarea",
+      "url": "https://x.com/OpenAIDevs/status/2119883176726409645"
+    }
+  ]
+}
