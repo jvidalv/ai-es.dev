@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-11",
+  "items": [
+    {
+      "subject": "Gemini 4 Carbon",
+      "fact": "ya está disponible por API en Google AI Studio y Gemini for business",
+      "url": "https://x.com/GoogleAI/status/2120187753329791341"
+    },
+    {
+      "subject": "Qwen4-Max",
+      "fact": "entra en vista previa en Token Plan, QwenWork, Qoder, Qwen APP y QwenStudio",
+      "url": "https://x.com/Alibaba_Qwen/status/2120335993643684315"
+    },
+    {
+      "subject": "Cursor",
+      "fact": "lanza Projects multiplayer en beta, con agentes que coordinan planes y marcan conflictos",
+      "url": "https://x.com/cursor_ai/status/2120295553309565139"
+    },
+    {
+      "subject": "Claude",
+      "fact": "lanza Whiteboards y Sheets en beta, y Data en disponibilidad general en planes de pago",
+      "url": "https://x.com/claudeai/status/2120206365759094857"
+    }
+  ]
+}
