@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-12",
+  "items": [
+    {
+      "subject": "Gemini Decisions API",
+      "fact": "evalúa hasta 1.000 preguntas de sí/no, opción y rúbrica en una pasada a 150-250 ms",
+      "url": "https://x.com/GoogleAIStudio/status/2120589299037147177"
+    },
+    {
+      "subject": "Managed Agents",
+      "fact": "admite sandboxes autoalojados con Vercel, Modal, Daytona, Fly, Cloudflare y E2B",
+      "url": "https://x.com/GoogleAIStudio/status/2120610219235660183"
+    },
+    {
+      "subject": "AlphaProof Code",
+      "fact": "verifica el protocolo de Signal a nivel de código, con 6 millones de líneas de prueba en Lean",
+      "url": "https://x.com/GoogleDeepMind/status/2120484246401777737"
+    }
+  ]
+}
