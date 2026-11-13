@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-13",
+  "items": [
+    {
+      "subject": "Gemini 4 Hydrogen",
+      "fact": "sale para la API Gemini, AI Studio y Antigravity; 2,5 veces más rápido que 3.8 Flash",
+      "url": "https://x.com/GoogleDeepMind/status/2120940338869055788"
+    },
+    {
+      "subject": "Claude Meetings",
+      "fact": "entra en Google Meet en beta para Team y Enterprise y construye docs y pizarras",
+      "url": "https://x.com/claudeai/status/2120973994191094179"
+    },
+    {
+      "subject": "Grok Bot",
+      "fact": "ya controla Mensajes, Mail, Notas, Recordatorios, Calendario, Ubicación y Contactos en Mac",
+      "url": "https://x.com/bot/status/2120946968403095906"
+    },
+    {
+      "subject": "Anthropic",
+      "fact": "registra su oferta pública inicial ante la SEC",
+      "url": "https://x.com/AnthropicAI/status/2120841731302154708"
+    }
+  ]
+}
