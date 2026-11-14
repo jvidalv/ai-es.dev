@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-14",
+  "items": [
+    {
+      "subject": "DeepSeek API",
+      "fact": "abre búsqueda, archivos, enlaces y voz en V4.1-Flash, más OCR, ASR y TTS sueltos",
+      "url": "https://x.com/deepseek_ai/status/2121247896918253875"
+    },
+    {
+      "subject": "GitHub Copilot",
+      "fact": "integra Gemini 4 Hydrogen en disponibilidad general en la app, la CLI y VS Code",
+      "url": "https://x.com/github/status/2121319695626518823"
+    },
+    {
+      "subject": "GR00T 2",
+      "fact": "lanza un modelo abierto System One que transfiere habilidades entre robots",
+      "url": "https://x.com/nvidia/status/2121319866712076769"
+    },
+    {
+      "subject": "Inkling 2 Small",
+      "fact": "entrena de extremo a extremo con paso forward nativo de 4 bits, del preentrenamiento al RL",
+      "url": "https://x.com/thinkymachines/status/2121353292878110868"
+    }
+  ]
+}
