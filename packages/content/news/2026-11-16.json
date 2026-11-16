@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-16",
+  "items": [
+    {
+      "subject": "Qwen4-Max",
+      "fact": "abre API en QwenCloud con 1M de contexto, visión nativa y 1,50/4,50 $ por millón",
+      "url": "https://x.com/Alibaba_Qwen/status/2122148127520289151"
+    },
+    {
+      "subject": "Hy4 flash",
+      "fact": "lanza API a 0,070/0,281 $ por millón e iguala a Claude Haiku 5.5 en pruebas ciegas",
+      "url": "https://x.com/TencentHunyuan/status/2122217770314301469"
+    },
+    {
+      "subject": "GitHub Copilot",
+      "fact": "ya localiza, explica y corrige alertas de seguridad del repo, en vista previa pública",
+      "url": "https://x.com/github/status/2122058578005487774"
+    }
+  ]
+}
