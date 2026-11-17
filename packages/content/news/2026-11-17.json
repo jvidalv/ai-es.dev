@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-17",
+  "items": [
+    {
+      "subject": "Hugging Face",
+      "fact": "integra OpenRouter: mismo token y endpoint, estadísticas en vivo y widget de inferencia",
+      "url": "https://x.com/huggingface/status/2122393775314264519"
+    },
+    {
+      "subject": "Grok Bot",
+      "fact": "incorpora bots que se unen a reuniones, toman la iniciativa y aprenden",
+      "url": "https://x.com/mattyp/status/2122343944889483583"
+    },
+    {
+      "subject": "Unity",
+      "fact": "adquiere Synty e integra POLYGON en Unity Spark, su plataforma de creación con IA",
+      "url": "https://x.com/unitygames/status/2122506926613270698"
+    },
+    {
+      "subject": "Vercel",
+      "fact": "permite usar modelos propios o autoalojados con las mismas APIs, auth y logs",
+      "url": "https://x.com/vercel/status/2122457875364864347"
+    }
+  ]
+}
