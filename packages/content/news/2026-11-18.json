@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-18",
+  "items": [
+    {
+      "subject": "GPT-6.2 Astra",
+      "fact": "llega a ChatGPT Work, Codex y la API junto a Sol, a menos de un tercio del coste de GPT-6 Astra",
+      "url": "https://x.com/OpenAI/status/2122750124543926515"
+    },
+    {
+      "subject": "Mistral Vibe",
+      "fact": "lanza app de escritorio con varios agentes en paralelo, diffs y pull requests en una ventana",
+      "url": "https://x.com/MistralAI/status/2122713547952324750"
+    },
+    {
+      "subject": "MAI Code 2",
+      "fact": "llega a GitHub Copilot junto a Flash, en la app, la CLI y VS Code",
+      "url": "https://x.com/github/status/2122814155979706846"
+    },
+    {
+      "subject": "Copilot Fusion Max",
+      "fact": "lidera Terminal-Bench 4.1 con un 71,2% y cuesta un 88% menos que Fable 5.2",
+      "url": "https://x.com/github/status/2122756587073028306"
+    }
+  ]
+}
