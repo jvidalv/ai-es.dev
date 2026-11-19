@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-19",
+  "items": [
+    {
+      "subject": "Gemini 4 Neon",
+      "fact": "llega a Gemini App, Antigravity y la API de pago, con 1M de tokens de contexto",
+      "url": "https://x.com/GoogleAI/status/2123168242797809944"
+    },
+    {
+      "subject": "Mistral Vibe",
+      "fact": "sale en escritorio para macOS y Windows y ejecuta agentes en local o en remoto",
+      "url": "https://x.com/MistralAI/status/2123073168659141119"
+    },
+    {
+      "subject": "Anthropic",
+      "fact": "fija su OPV en 83 dólares por acción y sale a cotizar en Nasdaq",
+      "url": "https://x.com/AnthropicAI/status/2123196808675405860"
+    }
+  ]
+}
