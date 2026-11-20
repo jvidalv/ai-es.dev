@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-20",
+  "items": [
+    {
+      "subject": "Gemini",
+      "fact": "activa computer use en Mac para Plus, Pro y Ultra de EE. UU.; opera carpetas, apps y la web",
+      "url": "https://x.com/GeminiApp/status/2123513203745538423"
+    },
+    {
+      "subject": "Unreal Engine",
+      "fact": "añade Guided AI Animation: genera clips en Sequencer desde texto, trayectorias y poses clave",
+      "url": "https://x.com/UnrealEngine/status/2123431363403829356"
+    },
+    {
+      "subject": "Genie 4",
+      "fact": "llega a la API de Gemini y a AI Studio con mundos editables en sesión y audio nativo",
+      "url": "https://x.com/GoogleAIStudio/status/2123479057996116143"
+    },
+    {
+      "subject": "Hermes Enterprise",
+      "fact": "entra en Teams, Microsoft Store y Azure, con cargas en sandboxes de Container Apps",
+      "url": "https://x.com/NousResearch/status/2123535954946257096"
+    }
+  ]
+}
