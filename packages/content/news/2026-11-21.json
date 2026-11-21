@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-21",
+  "items": [
+    {
+      "subject": "Inkling 2 Mini",
+      "fact": "lanza un transformer con bucles de 26B parámetros, ejecutable en portátil y 20,1 en AA Index",
+      "url": "https://x.com/thinkymachines/status/2123871643797995872"
+    },
+    {
+      "subject": "Gemini 3.5 Transcribe",
+      "fact": "abre en vista previa pública de la API la edición, reformulación y traducción de texto por voz",
+      "url": "https://x.com/Google/status/2123827048808370477"
+    },
+    {
+      "subject": "Gemini 4 Hydrogen",
+      "fact": "llega a Gemini App y Search para trabajo cotidiano y flujos de agentes",
+      "url": "https://x.com/Google/status/2123825847815561261"
+    },
+    {
+      "subject": "Unreal Engine 6",
+      "fact": "deja Blueprints; el gameplay va en Verse y Scene Graph, con IA de migración en 5.9",
+      "url": "https://x.com/UnrealEngine/status/2123810138117067123"
+    }
+  ]
+}
