@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-22",
+  "items": [
+    {
+      "subject": "Lean",
+      "fact": "certifica la hipótesis de Riemann en una biblioteca de 17 millones de líneas",
+      "url": "https://x.com/leanprover/status/2124159121645801562"
+    },
+    {
+      "subject": "OpenCode",
+      "fact": "rebaja un 60% GLM 5.3 y DeepSeek V4.1 Flash",
+      "url": "https://x.com/opencode/status/2124265178267005017"
+    },
+    {
+      "subject": "OpenRouter",
+      "fact": "retira a 3 proveedores y saca muchos endpoints de Zero Data Retention",
+      "url": "https://x.com/OpenRouter/status/2124315081899200715"
+    }
+  ]
+}
