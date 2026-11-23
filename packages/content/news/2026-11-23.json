@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-23",
+  "items": [
+    {
+      "subject": "Copilot Fusion",
+      "fact": "enruta cada prompt a un modelo o combina varios según calidad, velocidad y coste",
+      "url": "https://x.com/github/status/2124603184186380598"
+    },
+    {
+      "subject": "OpenAI",
+      "fact": "publica el progreso de preentrenamiento y propone límites comunes según perplexity",
+      "url": "https://x.com/merettm/status/2124549218995949967"
+    },
+    {
+      "subject": "Hy4",
+      "fact": "llega a Ollama Cloud con 770B parámetros, 49B activos, visión y computer use",
+      "url": "https://x.com/ollama/status/2124669766723920377"
+    }
+  ]
+}
