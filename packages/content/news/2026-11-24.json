@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-24",
+  "items": [
+    {
+      "subject": "Claude Ship",
+      "fact": "llega en beta a CLI y escritorio; /ship revisa PRs, corrige fallos y aprueba",
+      "url": "https://x.com/ClaudeDevs/status/2124959436640858475"
+    },
+    {
+      "subject": "Antigravity",
+      "fact": "abre Carbon a Pro e Hydrogen a todos y reinicia las cuotas al actualizar modelos",
+      "url": "https://x.com/_mohansolo/status/2124960419429458207"
+    },
+    {
+      "subject": "Claude",
+      "fact": "unifica conectores y skills en plugins; más de 10.000 en Free, Pro, Max y Ultra",
+      "url": "https://x.com/claudeai/status/2124970294523945328"
+    },
+    {
+      "subject": "Shirudo",
+      "fact": "lanza un runtime Linux open source para que agentes escriban controles eBPF sin cortar el servicio",
+      "url": "https://x.com/OpenAI/status/2124980590717911527"
+    }
+  ]
+}
