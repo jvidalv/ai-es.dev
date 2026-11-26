@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-26",
+  "items": [
+    {
+      "subject": "Private Inference",
+      "fact": "entra en pruebas con clientes: computación confidencial y ZDR sin acceso humano al contenido",
+      "url": "https://x.com/sama/status/2125638790593274259"
+    },
+    {
+      "subject": "GPT-6.2",
+      "fact": "agota el cupo un 40% más rápido en Astra y un 25% en Sol al corregir un descuento",
+      "url": "https://x.com/thsottiaux/status/2125784147889393806"
+    },
+    {
+      "subject": "Messages API",
+      "fact": "migra de Python a Rust; agentes Claude rastrean y corrigen las diferencias entre versiones",
+      "url": "https://x.com/AnthropicAI/status/2125627317263466739"
+    },
+    {
+      "subject": "Hugging Face",
+      "fact": "publica Legion y Msgboard para lanzar miles de agentes en local, Slurm o HF Jobs",
+      "url": "https://x.com/lvwerra/status/2125612908499349833"
+    }
+  ]
+}
