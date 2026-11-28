@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-28",
+  "items": [
+    {
+      "subject": "Antigravity CLI",
+      "fact": "integra Gemini 4 Neon y skills en ~/.agents; 34 mejoras en v1.5.13 a 1.5.18",
+      "url": "https://x.com/erintwalsh_/status/2126411148584968475"
+    },
+    {
+      "subject": "d1.3-ultra",
+      "fact": "llega a Liquid Console y empata el nº 1 del Decision Index 2.1 con 76,4",
+      "url": "https://x.com/liquidai/status/2126374995399975380"
+    },
+    {
+      "subject": "Claude",
+      "fact": "admite salvaguardas no visibles en investigación LLM las primeras 48 h de Fable 5",
+      "url": "https://x.com/edwinarbus/status/2126507795642187855"
+    }
+  ]
+}
